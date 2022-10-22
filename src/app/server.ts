@@ -12,6 +12,10 @@ import Router from "express-promise-router";
 import helmet from "helmet";
 import http from "http";
 import httpStatus from "http-status";
+import {
+  AppException,
+  APP_EXCEPTIONS,
+} from "../Context/Shared/domain/exception/AppException";
 import { registerRoutes } from "./routes";
 
 export class Server {
@@ -35,9 +39,16 @@ export class Server {
     registerRoutes(router);
 
     router.use(
-      (err: Error, req: Request, res: Response, next: NextFunction) => {
-        console.log(err);
-        res.status(httpStatus.INTERNAL_SERVER_ERROR).send();
+      (err: AppException, req: Request, res: Response, next: NextFunction) => {
+        switch (err.type) {
+          case APP_EXCEPTIONS.INVALID_ARGUMENT: {
+            res.status(400).send(err.message);
+          }
+          default: {
+            console.log(err);
+            res.status(httpStatus.INTERNAL_SERVER_ERROR).send();
+          }
+        }
       }
     );
   }

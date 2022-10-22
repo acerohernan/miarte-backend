@@ -26,7 +26,9 @@ Given("I send a GET request to {string}", async (route: string) => {
 Given(
   "I send a POST request to {string} with body:",
   async (route: string, body: string) => {
-    _request = request(_application.httpServer).post(route).send(body);
+    _request = request(_application.httpServer)
+      .post(route)
+      .send(JSON.parse(body));
     _response = await _request;
 
     await wait(100);
@@ -43,6 +45,11 @@ Then("the response status code should be {int}", (code: number) => {
 
 Then("the response body should be empty", () => {
   assert.deepStrictEqual({}, _response.body);
+});
+
+//To debbug
+Then("the response should be visible in the console", () => {
+  console.log(_response.status, _request.url, _response.body);
 });
 
 async function wait(milliseconds: number) {

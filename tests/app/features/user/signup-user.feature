@@ -12,5 +12,6 @@ Feature: Signup a user
             "username": "acerohernan"
         }
         """
+        Then the response should be visible in the console
         Then the response status code should be 201
         And the response body should be empty

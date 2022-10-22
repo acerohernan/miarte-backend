@@ -23,4 +23,12 @@ export const CONTAINER_TYPES = {
    * @author acerohernan
    */
   UserSignuper: Symbol.for("UserSignuper"),
+
+  /* INFRAESTRUCTURE */
+  /**
+   * UserRepository
+   * @description Repository for user entity
+   * @author acerohernan
+   */
+  UserRepository: Symbol.for("UserRepository"),
 };

@@ -1,4 +1,5 @@
 import "reflect-metadata";
+import { TypeOrmClientFactory } from "../Context/Shared/infrastructure/persistence/typeorm/TypeOrmClientFactory";
 import { Server } from "./server";
 
 export class MiArteApp {
@@ -9,6 +10,7 @@ export class MiArteApp {
     this.server = new Server(port);
 
     //configurations
+    await TypeOrmClientFactory.createClient();
 
     return this.server.listen();
   }
