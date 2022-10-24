@@ -1,13 +1,12 @@
 version: "3"
 services:
   postgres:
+    container_name: postgres-service
     image: postgres:15
     restart: always
     ports:
-      - "5432:5432"
-    volumes:
-      - .docker/data/postgres:/var/lib/postgresql/data
+      - "5433:5432"
     environment:
-      - POSTGRES_USER=mitienda
+      - POSTGRES_USER=miarte
       - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=mitienda_local
+      - POSTGRES_DB=miarte_local

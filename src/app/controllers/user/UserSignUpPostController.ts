@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { ParamsDictionary } from "express-serve-static-core";
 import { inject, injectable } from "inversify";
 import { ParsedQs } from "qs";
-import { UserSignuper } from "../../../Context/User/application/UserSignuper";
+import { UserSignuper } from "../../../Context/User/application/user-signup/UserSignuper";
 import { CONTAINER_TYPES } from "../../dependency-injection/types";
 import { Controller } from "../Controller";
 

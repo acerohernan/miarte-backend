@@ -16,7 +16,7 @@ export const UserEntity = new EntitySchema({
       type: "varchar",
       unique: true,
     },
-    passsword: { type: "varchar" },
+    password: { type: "varchar" },
     description: {
       type: "text",
       nullable: true,
@@ -38,27 +38,27 @@ export const UserEntity = new EntitySchema({
       nullable: true,
     },
     allow_users_message_me: {
-      type: Boolean,
+      type: "bool",
       default: false,
     },
     marketing_off_site: {
-      type: Boolean,
+      type: "bool",
       default: false,
     },
     send_special_offers: {
-      type: Boolean,
+      type: "bool",
       default: false,
     },
     show_age_in_profile: {
-      type: Boolean,
+      type: "bool",
       default: false,
     },
     show_city_and_country_in_profile: {
-      type: Boolean,
+      type: "bool",
       default: false,
     },
     visible_real_name: {
-      type: Boolean,
+      type: "bool",
       default: false,
     },
   },

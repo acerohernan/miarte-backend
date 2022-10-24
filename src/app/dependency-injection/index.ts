@@ -1,7 +1,9 @@
 import { Container } from "inversify";
-import { UserSignuper } from "../../Context/User/application/UserSignuper";
+import { EnvironmentArranger } from "../../../tests/Context/infrastructure/arranger/EnvironmentArranger";
+import { TypeOrmEnvironmentArranger } from "../../../tests/Context/infrastructure/typeorm/TypeOrmEnvironmentArranger";
+import { UserSignuper } from "../../Context/User/application/user-signup/UserSignuper";
 import { UserRepository } from "../../Context/User/domain/UserRepository";
-import { TypeOrmUserRepository } from "../../Context/User/infrastructure/TypeOrmUserRepository";
+import { TypeOrmUserRepository } from "../../Context/User/infrastructure/persistence/typeorm/TypeOrmUserRepository";
 import { StatusGetController } from "../controllers/status/StatusGetController";
 import { UserSignUpPostController } from "../controllers/user/UserSignUpPostController";
 import { CONTAINER_TYPES } from "./types";
@@ -43,5 +45,14 @@ container.bind<UserSignuper>(CONTAINER_TYPES.UserSignuper).to(UserSignuper);
 container
   .bind<UserRepository>(CONTAINER_TYPES.UserRepository)
   .to(TypeOrmUserRepository);
+
+/**
+ * EnvironmentArranger
+ * @description An environment arranger for the tests features
+ * @author acerohernan
+ */
+container
+  .bind<EnvironmentArranger>(CONTAINER_TYPES.EnvironmentArranger)
+  .to(TypeOrmEnvironmentArranger);
 
 export default container;

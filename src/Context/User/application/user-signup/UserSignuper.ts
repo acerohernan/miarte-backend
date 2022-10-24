@@ -1,12 +1,13 @@
-import { injectable } from "inversify";
-import { DuplicatedEntityException } from "../../Shared/domain/exception/DuplicatedEntityException";
-import { Uuid } from "../../Shared/domain/Uuid";
-import { User } from "../domain/User";
-import { UserRepository } from "../domain/UserRepository";
-import { UserEmail } from "../domain/value-object/UserEmail";
-import { UserId } from "../domain/value-object/UserId";
-import { UserPassword } from "../domain/value-object/UserPassword";
-import { UserUsername } from "../domain/value-object/UserUsername";
+import { inject, injectable } from "inversify";
+import { CONTAINER_TYPES } from "../../../../app/dependency-injection/types";
+import { DuplicatedEntityException } from "../../../Shared/domain/exception/DuplicatedEntityException";
+import { Uuid } from "../../../Shared/domain/Uuid";
+import { User } from "../../domain/User";
+import { UserRepository } from "../../domain/UserRepository";
+import { UserEmail } from "../../domain/value-object/UserEmail";
+import { UserId } from "../../domain/value-object/UserId";
+import { UserPassword } from "../../domain/value-object/UserPassword";
+import { UserUsername } from "../../domain/value-object/UserUsername";
 
 type Params = {
   email: string;
@@ -16,7 +17,9 @@ type Params = {
 
 @injectable()
 export class UserSignuper {
-  constructor(private repository: UserRepository) {}
+  constructor(
+    @inject(CONTAINER_TYPES.UserRepository) private repository: UserRepository
+  ) {}
 
   async run(params: Params) {
     await this.ensureThatUserWithTheSameEmailNotExists(

@@ -1,3 +1,4 @@
+import { injectable } from "inversify";
 import { EntitySchema, Repository } from "typeorm";
 import {
   AggregateRootPrimitives,
@@ -5,6 +6,7 @@ import {
 } from "../../../domain/AggregateRoot";
 import { TypeOrmClientFactory } from "./TypeOrmClientFactory";
 
+@injectable()
 export abstract class TypeOrmRepository<
   T extends AgregateRoot,
   S extends AggregateRootPrimitives

@@ -1,21 +1,34 @@
 import { AfterAll, BeforeAll, Given, Then } from "@cucumber/cucumber";
 import assert from "assert";
 import request from "supertest";
+import container from "../../../../src/app/dependency-injection";
+import { CONTAINER_TYPES } from "../../../../src/app/dependency-injection/types";
 import { MiArteApp } from "../../../../src/app/MiArteApp";
+import { EnvironmentArranger } from "../../../Context/infrastructure/arranger/EnvironmentArranger";
 
 let _application: MiArteApp;
+let _environmentArranger: EnvironmentArranger;
 let _request: request.Request;
 let _response: request.Response;
 
+/* Hooks */
 BeforeAll(async () => {
   _application = new MiArteApp();
+
+  _environmentArranger = container.get<EnvironmentArranger>(
+    CONTAINER_TYPES.EnvironmentArranger
+  );
+
   await _application.start();
+  await _environmentArranger.arrange();
 });
 
 AfterAll(async () => {
   await _application.stop();
+  await _environmentArranger.close();
 });
 
+/* Steps */
 Given("I send a GET request to {string}", async (route: string) => {
   _request = request(_application.httpServer).get(route);
   _response = await _request;
@@ -47,7 +60,12 @@ Then("the response body should be empty", () => {
   assert.deepStrictEqual({}, _response.body);
 });
 
-//To debbug
+Then("the response body should have an error message", () => {
+  if (!_response.body["error"])
+    throw new Error(`The response body not have an error message`);
+});
+
+/* Steps for Debug */
 Then("the response should be visible in the console", () => {
   console.log(_response.status, _request.url, _response.body);
 });

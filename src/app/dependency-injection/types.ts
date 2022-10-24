@@ -31,4 +31,11 @@ export const CONTAINER_TYPES = {
    * @author acerohernan
    */
   UserRepository: Symbol.for("UserRepository"),
+
+  /**
+   * EnvironmentArranger
+   * @description An environment arranger for the tests features
+   * @author acerohernan
+   */
+  EnvironmentArranger: Symbol.for("EnvironmentArranger"),
 };

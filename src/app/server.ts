@@ -42,11 +42,17 @@ export class Server {
       (err: AppException, req: Request, res: Response, next: NextFunction) => {
         switch (err.type) {
           case APP_EXCEPTIONS.INVALID_ARGUMENT: {
-            res.status(400).send(err.message);
+            res.status(httpStatus.BAD_REQUEST).send({ error: err.message });
+            break;
+          }
+          case APP_EXCEPTIONS.DUPLICATED_ENTITY: {
+            res.status(httpStatus.BAD_REQUEST).send({ error: err.message });
+            break;
           }
           default: {
             console.log(err);
             res.status(httpStatus.INTERNAL_SERVER_ERROR).send();
+            break;
           }
         }
       }
