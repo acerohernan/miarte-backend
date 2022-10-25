@@ -25,7 +25,7 @@ BeforeAll(async () => {
 
 AfterAll(async () => {
   await _application.stop();
-  await _environmentArranger.close();
+  //await _environmentArranger.close();
 });
 
 /* Steps */
@@ -64,6 +64,14 @@ Then("the response body should have an error message", () => {
   if (!_response.body["error"])
     throw new Error(`The response body not have an error message`);
 });
+
+Then(
+  "the response body should have the property {string}",
+  (property: string) => {
+    if (!_response.body[property])
+      throw new Error(`The response body not have the property ${property}`);
+  }
+);
 
 /* Steps for Debug */
 Then("the response should be visible in the console", () => {

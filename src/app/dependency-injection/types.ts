@@ -15,6 +15,13 @@ export const CONTAINER_TYPES = {
    */
   UserSignUpPostController: Symbol.for("UserSignUpPostController"),
 
+  /**
+   * UserLoginPostController
+   * @description Rest Controller to authenticate a user
+   * @author acerohernan
+   */
+  UserLoginPostController: Symbol.for("UserLoginPostController"),
+
   /* APPLICATION SERVICES */
 
   /**
@@ -23,6 +30,13 @@ export const CONTAINER_TYPES = {
    * @author acerohernan
    */
   UserSignuper: Symbol.for("UserSignuper"),
+
+  /**
+   * UserAuthenticator
+   * @description Application Service to authenticate an user
+   * @author acerohernan
+   */
+  UserAuthenticator: Symbol.for("UserAuthenticator"),
 
   /* INFRAESTRUCTURE */
   /**

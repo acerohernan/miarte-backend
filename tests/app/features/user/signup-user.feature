@@ -54,6 +54,18 @@ Feature: Signup a user
         """
         Then the response status code should be 400
         And the response body should have an error message
+
+    Scenario: A invalid email
+        Given I send a POST request to "/user/auth/signup" with body:
+        """
+        {
+            "email": "sdassasd",
+            "password": "Password1",
+            "username": "nuevouser"
+        }
+        """
+        Then the response status code should be 400
+        And the response body should have an error message
     
 
     

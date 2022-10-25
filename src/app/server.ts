@@ -49,6 +49,10 @@ export class Server {
             res.status(httpStatus.BAD_REQUEST).send({ error: err.message });
             break;
           }
+          case APP_EXCEPTIONS.UNAUTHORIZED: {
+            res.status(httpStatus.UNAUTHORIZED).send({ error: err.message });
+            break;
+          }
           default: {
             console.log(err);
             res.status(httpStatus.INTERNAL_SERVER_ERROR).send();

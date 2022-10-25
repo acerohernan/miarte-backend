@@ -39,4 +39,8 @@ export class UserPassword extends StringValueObject {
   private verifyIfIsAPasswordHashed(password: string): boolean {
     return this.BCRYPT_HASH_REGEX.test(password);
   }
+
+  comparePassword(candidatePassword: string): boolean {
+    return bcrypt.compareSync(candidatePassword, this.value);
+  }
 }
