@@ -10,6 +10,7 @@ import { UserPassword } from "../../domain/value-object/UserPassword";
 import { UserUsername } from "../../domain/value-object/UserUsername";
 
 type Params = {
+  id?: string;
   email: string;
   password: string;
   username: string;
@@ -30,7 +31,7 @@ export class UserSignuper {
     );
 
     const user = User.create({
-      id: new UserId(Uuid.random().value),
+      id: new UserId(params.id || Uuid.random().value),
       email: new UserEmail(params.email),
       password: new UserPassword(params.password),
       username: new UserUsername(params.username),

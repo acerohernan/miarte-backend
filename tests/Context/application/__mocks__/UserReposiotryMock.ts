@@ -24,4 +24,8 @@ export class UserReposiotryMock implements UserRepository {
   public assertSaveHasBeenCalledWith(user: User) {
     expect(this.mockSave).toHaveBeenCalledWith(user);
   }
+
+  public assertSaveHasBeenCalled() {
+    expect(this.mockSave).toHaveBeenCalled();
+  }
 }

@@ -3,7 +3,9 @@ import { InvalidArgumentException } from "../../../Shared/domain/exception/Inval
 import { StringValueObject } from "../../../Shared/domain/StringValueObject";
 
 export class UserPassword extends StringValueObject {
-  static PASSWORD_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+  private PASSWORD_VALIDATION_REGEX =
+    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+  private BCRYPT_HASH_REGEX = /^\$2[ayb]\$.{56}$/;
 
   //OVERRIDE
   value: string;
@@ -12,12 +14,18 @@ export class UserPassword extends StringValueObject {
     super(value);
 
     this.ensureThatIsAValidPassword(value);
-    const hashedPassword = this.encryptThePassword(value);
-    this.value = hashedPassword;
+
+    let passwordToSave = value;
+
+    if (!this.verifyIfIsAPasswordHashed(value)) {
+      passwordToSave = this.encryptThePassword(value);
+    }
+
+    this.value = passwordToSave;
   }
 
   private ensureThatIsAValidPassword(password: string) {
-    if (!UserPassword.PASSWORD_REGEX.test(password))
+    if (!this.PASSWORD_VALIDATION_REGEX.test(password))
       throw new InvalidArgumentException(
         `The password must have more than 8 characters, at least one uppercase letter and one number`
       );
@@ -26,5 +34,9 @@ export class UserPassword extends StringValueObject {
   private encryptThePassword(password: string): string {
     const salt = bcrypt.genSaltSync(10);
     return bcrypt.hashSync(password, salt);
+  }
+
+  private verifyIfIsAPasswordHashed(password: string): boolean {
+    return this.BCRYPT_HASH_REGEX.test(password);
   }
 }
