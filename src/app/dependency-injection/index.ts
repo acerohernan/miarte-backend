@@ -4,12 +4,14 @@ import { TypeOrmEnvironmentArranger } from "../../../tests/Context/Shared/infras
 import { UserForgotPasswordHandler } from "../../Context/User/application/user-forgot-password/UserForgotPasswordHandler";
 import { UserAuthenticator } from "../../Context/User/application/user-login/UserAuthenticator";
 import { UserSignuper } from "../../Context/User/application/user-signup/UserSignuper";
+import { UserForgotPasswordVerifier } from "../../Context/User/application/user-verify-forgot-password-code/UserForgotPasswordVerifier";
 import { UserRepository } from "../../Context/User/domain/UserRepository";
 import { TypeOrmUserRepository } from "../../Context/User/infrastructure/persistence/typeorm/TypeOrmUserRepository";
 import { StatusGetController } from "../controllers/status/StatusGetController";
 import { UserForgotPasswordPostController } from "../controllers/user/UserForgotPasswordPostController";
 import { UserLoginPostController } from "../controllers/user/UserLoginPostController";
 import { UserSignUpPostController } from "../controllers/user/UserSignUpPostController";
+import { UserVerifyForgotPasswordGetController } from "../controllers/user/UserVerifyForgotPasswordGetController";
 import { CONTAINER_TYPES } from "./types";
 
 const container = new Container();
@@ -54,6 +56,17 @@ container
   )
   .to(UserForgotPasswordPostController);
 
+/**
+ * UserVerifyForgotPasswordGetController
+ * @description Rest Controller to verify the forgot password code
+ * @author acerohernan
+ */
+container
+  .bind<UserVerifyForgotPasswordGetController>(
+    CONTAINER_TYPES.UserVerifyForgotPasswordGetController
+  )
+  .to(UserVerifyForgotPasswordGetController);
+
 /* APPLICATION SERVICES */
 
 /**
@@ -80,6 +93,15 @@ container
 container
   .bind<UserForgotPasswordHandler>(CONTAINER_TYPES.UserForgotPasswordHandler)
   .to(UserForgotPasswordHandler);
+
+/**
+ * UserForgotPasswordVerifier
+ * @description Application Service to verify the forgot password code
+ * @author acerohernan
+ */
+container
+  .bind<UserForgotPasswordVerifier>(CONTAINER_TYPES.UserForgotPasswordVerifier)
+  .to(UserForgotPasswordVerifier);
 
 /* INFRAESTRUCTURE */
 

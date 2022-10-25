@@ -2,6 +2,7 @@ import { Router } from "express";
 import { UserForgotPasswordPostController } from "../controllers/user/UserForgotPasswordPostController";
 import { UserLoginPostController } from "../controllers/user/UserLoginPostController";
 import { UserSignUpPostController } from "../controllers/user/UserSignUpPostController";
+import { UserVerifyForgotPasswordGetController } from "../controllers/user/UserVerifyForgotPasswordGetController";
 import container from "../dependency-injection";
 import { CONTAINER_TYPES } from "../dependency-injection/types";
 
@@ -26,5 +27,13 @@ export function register(router: Router) {
     );
   router.post("/user/auth/password/forgot", (req, res) =>
     userForgotPasswordPostController.run(req, res)
+  );
+
+  const userVerifyForgotPasswordGetController =
+    container.get<UserVerifyForgotPasswordGetController>(
+      CONTAINER_TYPES.UserVerifyForgotPasswordGetController
+    );
+  router.get("/user/auth/password/verify-code", (req, res) =>
+    userVerifyForgotPasswordGetController.run(req, res)
   );
 }
