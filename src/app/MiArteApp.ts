@@ -1,4 +1,5 @@
 import "reflect-metadata";
+import config from "../Context/Shared/infrastructure/config";
 import { TypeOrmClientFactory } from "../Context/Shared/infrastructure/persistence/typeorm/TypeOrmClientFactory";
 import { Server } from "./server";
 
@@ -6,7 +7,7 @@ export class MiArteApp {
   server?: Server;
 
   async start() {
-    const port = process.env.port || "5000";
+    const port = config.port || "5000";
     this.server = new Server(port);
 
     //configurations

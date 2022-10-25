@@ -2,6 +2,7 @@ import { inject, injectable } from "inversify";
 import jwt from "jsonwebtoken";
 import { CONTAINER_TYPES } from "../../../../app/dependency-injection/types";
 import { NotFoundException } from "../../../Shared/domain/exception/NotFoundException";
+import config from "../../../Shared/infrastructure/config";
 import { User } from "../../domain/User";
 import { UserRepository } from "../../domain/UserRepository";
 import { UserEmail } from "../../domain/value-object/UserEmail";
@@ -36,6 +37,6 @@ export class UserForgotPasswordHandler {
       user: user.id.value,
     };
 
-    return jwt.sign(payload, "secret", { algorithm: "HS256" });
+    return jwt.sign(payload, config.jwt.secret, { algorithm: "HS256" });
   }
 }
