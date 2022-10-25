@@ -1,4 +1,4 @@
-import { User } from "../../../src/Context/User/domain/User";
+import { User } from "../../../../src/Context/User/domain/User";
 
 export class UserMother {
   static random(): User {

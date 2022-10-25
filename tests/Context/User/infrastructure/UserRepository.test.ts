@@ -1,9 +1,9 @@
-import container from "../../../src/app/dependency-injection";
-import { CONTAINER_TYPES } from "../../../src/app/dependency-injection/types";
-import { TypeOrmClientFactory } from "../../../src/Context/Shared/infrastructure/persistence/typeorm/TypeOrmClientFactory";
-import { UserRepository } from "../../../src/Context/User/domain/UserRepository";
+import container from "../../../../src/app/dependency-injection";
+import { CONTAINER_TYPES } from "../../../../src/app/dependency-injection/types";
+import { TypeOrmClientFactory } from "../../../../src/Context/Shared/infrastructure/persistence/typeorm/TypeOrmClientFactory";
+import { UserRepository } from "../../../../src/Context/User/domain/UserRepository";
+import { EnvironmentArranger } from "../../Shared/infrastructure/arranger/EnvironmentArranger";
 import { UserMother } from "../domain/UserMother";
-import { EnvironmentArranger } from "./arranger/EnvironmentArranger";
 
 const repository = container.get<UserRepository>(
   CONTAINER_TYPES.UserRepository

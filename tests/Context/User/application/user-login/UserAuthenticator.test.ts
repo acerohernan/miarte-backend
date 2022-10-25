@@ -1,6 +1,6 @@
 import "reflect-metadata";
-import { APP_EXCEPTIONS } from "../../../../src/Context/Shared/domain/exception/AppException";
-import { UserAuthenticator } from "../../../../src/Context/User/application/user-login/UserAuthenticator";
+import { APP_EXCEPTIONS } from "../../../../../src/Context/Shared/domain/exception/AppException";
+import { UserAuthenticator } from "../../../../../src/Context/User/application/user-login/UserAuthenticator";
 import { UserMother } from "../../domain/UserMother";
 import { UserRepositoryMock } from "../__mocks__/UserRepositoryMock";
 

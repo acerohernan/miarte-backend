@@ -1,6 +1,6 @@
 import { injectable } from "inversify";
 import { DataSource } from "typeorm";
-import { TypeOrmClientFactory } from "../../../../src/Context/Shared/infrastructure/persistence/typeorm/TypeOrmClientFactory";
+import { TypeOrmClientFactory } from "../../../../../src/Context/Shared/infrastructure/persistence/typeorm/TypeOrmClientFactory";
 import { EnvironmentArranger } from "../arranger/EnvironmentArranger";
 
 @injectable()

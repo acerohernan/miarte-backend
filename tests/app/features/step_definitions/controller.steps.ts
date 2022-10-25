@@ -4,7 +4,7 @@ import request from "supertest";
 import container from "../../../../src/app/dependency-injection";
 import { CONTAINER_TYPES } from "../../../../src/app/dependency-injection/types";
 import { MiArteApp } from "../../../../src/app/MiArteApp";
-import { EnvironmentArranger } from "../../../Context/infrastructure/arranger/EnvironmentArranger";
+import { EnvironmentArranger } from "../../../Context/Shared/infrastructure/arranger/EnvironmentArranger";
 
 let _application: MiArteApp;
 let _environmentArranger: EnvironmentArranger;

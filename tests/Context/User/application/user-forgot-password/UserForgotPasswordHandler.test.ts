@@ -1,6 +1,6 @@
 import "reflect-metadata";
-import { APP_EXCEPTIONS } from "../../../../src/Context/Shared/domain/exception/AppException";
-import { UserForgotPasswordHandler } from "../../../../src/Context/User/application/user-forgot-password/UserForgotPasswordHandler";
+import { APP_EXCEPTIONS } from "../../../../../src/Context/Shared/domain/exception/AppException";
+import { UserForgotPasswordHandler } from "../../../../../src/Context/User/application/user-forgot-password/UserForgotPasswordHandler";
 import { UserMother } from "../../domain/UserMother";
 import { UserRepositoryMock } from "../__mocks__/UserRepositoryMock";
 

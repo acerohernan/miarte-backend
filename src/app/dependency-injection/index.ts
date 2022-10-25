@@ -1,6 +1,6 @@
 import { Container } from "inversify";
-import { EnvironmentArranger } from "../../../tests/Context/infrastructure/arranger/EnvironmentArranger";
-import { TypeOrmEnvironmentArranger } from "../../../tests/Context/infrastructure/typeorm/TypeOrmEnvironmentArranger";
+import { EnvironmentArranger } from "../../../tests/Context/Shared/infrastructure/arranger/EnvironmentArranger";
+import { TypeOrmEnvironmentArranger } from "../../../tests/Context/Shared/infrastructure/typeorm/TypeOrmEnvironmentArranger";
 import { UserForgotPasswordHandler } from "../../Context/User/application/user-forgot-password/UserForgotPasswordHandler";
 import { UserAuthenticator } from "../../Context/User/application/user-login/UserAuthenticator";
 import { UserSignuper } from "../../Context/User/application/user-signup/UserSignuper";

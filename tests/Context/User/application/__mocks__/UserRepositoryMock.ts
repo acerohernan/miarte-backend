@@ -1,8 +1,8 @@
-import { Nullable } from "../../../../src/Context/Shared/domain/Nullable";
-import { User } from "../../../../src/Context/User/domain/User";
-import { UserRepository } from "../../../../src/Context/User/domain/UserRepository";
-import { UserEmail } from "../../../../src/Context/User/domain/value-object/UserEmail";
-import { UserUsername } from "../../../../src/Context/User/domain/value-object/UserUsername";
+import { Nullable } from "../../../../../src/Context/Shared/domain/Nullable";
+import { User } from "../../../../../src/Context/User/domain/User";
+import { UserRepository } from "../../../../../src/Context/User/domain/UserRepository";
+import { UserEmail } from "../../../../../src/Context/User/domain/value-object/UserEmail";
+import { UserUsername } from "../../../../../src/Context/User/domain/value-object/UserUsername";
 
 export class UserRepositoryMock implements UserRepository {
   private mocksSearchByEmail = jest.fn();
