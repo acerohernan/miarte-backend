@@ -22,6 +22,15 @@ export const CONTAINER_TYPES = {
    */
   UserLoginPostController: Symbol.for("UserLoginPostController"),
 
+  /**
+   * UserForgotPasswordPostController
+   * @description Rest Controller to get the code to restore the password
+   * @author acerohernan
+   */
+  UserForgotPasswordPostController: Symbol.for(
+    "UserForgotPasswordPostController"
+  ),
+
   /* APPLICATION SERVICES */
 
   /**
@@ -37,6 +46,13 @@ export const CONTAINER_TYPES = {
    * @author acerohernan
    */
   UserAuthenticator: Symbol.for("UserAuthenticator"),
+
+  /**
+   * UserForgotPasswordHandler
+   * @description Application Service to handler when a user forgot his password
+   * @author acerohernan
+   */
+  UserForgotPasswordHandler: Symbol.for("UserForgotPasswordHandler"),
 
   /* INFRAESTRUCTURE */
   /**

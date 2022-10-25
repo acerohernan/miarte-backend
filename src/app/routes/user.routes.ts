@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { UserForgotPasswordPostController } from "../controllers/user/UserForgotPasswordPostController";
 import { UserLoginPostController } from "../controllers/user/UserLoginPostController";
 import { UserSignUpPostController } from "../controllers/user/UserSignUpPostController";
 import container from "../dependency-injection";
@@ -17,5 +18,13 @@ export function register(router: Router) {
   );
   router.post("/user/auth/login", (req, res) =>
     userLoginPostController.run(req, res)
+  );
+
+  const userForgotPasswordPostController =
+    container.get<UserForgotPasswordPostController>(
+      CONTAINER_TYPES.UserForgotPasswordPostController
+    );
+  router.post("/user/auth/password/forgot", (req, res) =>
+    userForgotPasswordPostController.run(req, res)
   );
 }

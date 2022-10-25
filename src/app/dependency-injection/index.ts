@@ -1,11 +1,13 @@
 import { Container } from "inversify";
 import { EnvironmentArranger } from "../../../tests/Context/infrastructure/arranger/EnvironmentArranger";
 import { TypeOrmEnvironmentArranger } from "../../../tests/Context/infrastructure/typeorm/TypeOrmEnvironmentArranger";
+import { UserForgotPasswordHandler } from "../../Context/User/application/user-forgot-password/UserForgotPasswordHandler";
 import { UserAuthenticator } from "../../Context/User/application/user-login/UserAuthenticator";
 import { UserSignuper } from "../../Context/User/application/user-signup/UserSignuper";
 import { UserRepository } from "../../Context/User/domain/UserRepository";
 import { TypeOrmUserRepository } from "../../Context/User/infrastructure/persistence/typeorm/TypeOrmUserRepository";
 import { StatusGetController } from "../controllers/status/StatusGetController";
+import { UserForgotPasswordPostController } from "../controllers/user/UserForgotPasswordPostController";
 import { UserLoginPostController } from "../controllers/user/UserLoginPostController";
 import { UserSignUpPostController } from "../controllers/user/UserSignUpPostController";
 import { CONTAINER_TYPES } from "./types";
@@ -41,6 +43,17 @@ container
   .bind<UserLoginPostController>(CONTAINER_TYPES.UserLoginPostController)
   .to(UserLoginPostController);
 
+/**
+ * UserForgotPasswordPostController
+ * @description Rest Controller to get the code to restore the password
+ * @author acerohernan
+ */
+container
+  .bind<UserForgotPasswordPostController>(
+    CONTAINER_TYPES.UserForgotPasswordPostController
+  )
+  .to(UserForgotPasswordPostController);
+
 /* APPLICATION SERVICES */
 
 /**
@@ -58,6 +71,15 @@ container.bind<UserSignuper>(CONTAINER_TYPES.UserSignuper).to(UserSignuper);
 container
   .bind<UserAuthenticator>(CONTAINER_TYPES.UserAuthenticator)
   .to(UserAuthenticator);
+
+/**
+ * UserForgotPasswordHandler
+ * @description Application Service to handler when a user forgot his password
+ * @author acerohernan
+ */
+container
+  .bind<UserForgotPasswordHandler>(CONTAINER_TYPES.UserForgotPasswordHandler)
+  .to(UserForgotPasswordHandler);
 
 /* INFRAESTRUCTURE */
 

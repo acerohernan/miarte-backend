@@ -53,6 +53,10 @@ export class Server {
             res.status(httpStatus.UNAUTHORIZED).send({ error: err.message });
             break;
           }
+          case APP_EXCEPTIONS.NOT_FOUND: {
+            res.status(httpStatus.NOT_FOUND).send({ error: err.message });
+            break;
+          }
           default: {
             console.log(err);
             res.status(httpStatus.INTERNAL_SERVER_ERROR).send();
