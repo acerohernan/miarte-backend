@@ -18,7 +18,7 @@ describe("UserSignuper", () => {
       username: user.username.value,
     });
 
-    repository.assertSaveHasBeenCalled();
+    repository.assertSaveHasBeenCalledWith(user);
   });
 
   it("should throw an exception with bad email", async () => {
