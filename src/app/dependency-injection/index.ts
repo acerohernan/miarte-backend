@@ -3,6 +3,7 @@ import { EnvironmentArranger } from "../../../tests/Context/Shared/infrastructur
 import { TypeOrmEnvironmentArranger } from "../../../tests/Context/Shared/infrastructure/typeorm/TypeOrmEnvironmentArranger";
 import { UserForgotPasswordHandler } from "../../Context/User/application/user-forgot-password/UserForgotPasswordHandler";
 import { UserAuthenticator } from "../../Context/User/application/user-login/UserAuthenticator";
+import { UserPasswordRestorer } from "../../Context/User/application/user-restore-password/UserPasswordRestorer";
 import { UserSignuper } from "../../Context/User/application/user-signup/UserSignuper";
 import { UserForgotPasswordVerifier } from "../../Context/User/application/user-verify-forgot-password-code/UserForgotPasswordVerifier";
 import { UserRepository } from "../../Context/User/domain/UserRepository";
@@ -10,6 +11,7 @@ import { TypeOrmUserRepository } from "../../Context/User/infrastructure/persist
 import { StatusGetController } from "../controllers/status/StatusGetController";
 import { UserForgotPasswordPostController } from "../controllers/user/UserForgotPasswordPostController";
 import { UserLoginPostController } from "../controllers/user/UserLoginPostController";
+import { UserRestorePasswordPostController } from "../controllers/user/UserRestorePasswordPostController";
 import { UserSignUpPostController } from "../controllers/user/UserSignUpPostController";
 import { UserVerifyForgotPasswordGetController } from "../controllers/user/UserVerifyForgotPasswordGetController";
 import { CONTAINER_TYPES } from "./types";
@@ -67,6 +69,17 @@ container
   )
   .to(UserVerifyForgotPasswordGetController);
 
+/**
+ * UserRestorePasswordPostController
+ * @description Rest Controller to restore the user password with forgot password code
+ * @author acerohernan
+ */
+container
+  .bind<UserRestorePasswordPostController>(
+    CONTAINER_TYPES.UserRestorePasswordPostController
+  )
+  .to(UserRestorePasswordPostController);
+
 /* APPLICATION SERVICES */
 
 /**
@@ -102,6 +115,15 @@ container
 container
   .bind<UserForgotPasswordVerifier>(CONTAINER_TYPES.UserForgotPasswordVerifier)
   .to(UserForgotPasswordVerifier);
+
+/**
+ * UserPasswordRestorer
+ * @description Application Service to to restore the password with the forgot password code
+ * @author acerohernan
+ */
+container
+  .bind<UserPasswordRestorer>(CONTAINER_TYPES.UserPasswordRestorer)
+  .to(UserPasswordRestorer);
 
 /* INFRAESTRUCTURE */
 

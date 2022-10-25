@@ -5,6 +5,7 @@ import { TypeOrmRepository } from "../../../../Shared/infrastructure/persistence
 import { User, UserPrimitives } from "../../../domain/User";
 import { UserRepository } from "../../../domain/UserRepository";
 import { UserEmail } from "../../../domain/value-object/UserEmail";
+import { UserId } from "../../../domain/value-object/UserId";
 import { UserUsername } from "../../../domain/value-object/UserUsername";
 import { UserEntity } from "./UserEntity";
 
@@ -19,6 +20,16 @@ export class TypeOrmUserRepository
   async save(user: User): Promise<void> {
     await this.persist(user);
   }
+
+  async search(id: UserId): Promise<Nullable<User>> {
+    const repository = await this.repository();
+    const userPrimitives = await repository.findOneBy({ id: id.value });
+
+    if (!userPrimitives) return null;
+
+    return User.fromPrimitives(userPrimitives);
+  }
+
   async searchByEmail(email: UserEmail): Promise<Nullable<User>> {
     const repository = await this.repository();
     const userPrimitives = await repository.findOneBy({ email: email.value });
@@ -27,6 +38,7 @@ export class TypeOrmUserRepository
 
     return User.fromPrimitives(userPrimitives);
   }
+
   async searchByUsername(username: UserUsername): Promise<Nullable<User>> {
     const repository = await this.repository();
     const userPrimitives = await repository.findOneBy({

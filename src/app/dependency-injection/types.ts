@@ -40,6 +40,15 @@ export const CONTAINER_TYPES = {
     "UserVerifyForgotPasswordGetController"
   ),
 
+  /**
+   * UserVerifyForgotPasswordGetController
+   * @description Rest Controller to restore the user password with forgot password code
+   * @author acerohernan
+   */
+  UserRestorePasswordPostController: Symbol.for(
+    "UserRestorePasswordPostController"
+  ),
+
   /* APPLICATION SERVICES */
 
   /**
@@ -69,6 +78,13 @@ export const CONTAINER_TYPES = {
    * @author acerohernan
    */
   UserForgotPasswordVerifier: Symbol.for("UserForgotPasswordVerifier"),
+
+  /**
+   * UserPasswordRestorer
+   * @description Application Service to to restore the password with the forgot password code
+   * @author acerohernan
+   */
+  UserPasswordRestorer: Symbol.for("UserPasswordRestorer"),
 
   /* INFRAESTRUCTURE */
   /**

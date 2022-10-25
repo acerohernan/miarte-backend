@@ -1,6 +1,6 @@
 Feature: Verify Forgot Password Code
     In order to verify the forgot password code to restore the user password
-    As anon user
+    As registered user
     I want to verify my code
 
     Scenario: A valid forgot password code

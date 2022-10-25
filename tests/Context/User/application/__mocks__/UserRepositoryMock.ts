@@ -2,12 +2,14 @@ import { Nullable } from "../../../../../src/Context/Shared/domain/Nullable";
 import { User } from "../../../../../src/Context/User/domain/User";
 import { UserRepository } from "../../../../../src/Context/User/domain/UserRepository";
 import { UserEmail } from "../../../../../src/Context/User/domain/value-object/UserEmail";
+import { UserId } from "../../../../../src/Context/User/domain/value-object/UserId";
 import { UserUsername } from "../../../../../src/Context/User/domain/value-object/UserUsername";
 
 export class UserRepositoryMock implements UserRepository {
   private mocksSearchByEmail = jest.fn();
   private mocksSearchByUsername = jest.fn();
   private mockSave = jest.fn();
+  private mockSearch = jest.fn();
 
   async save(user: User): Promise<void> {
     this.mockSave(user);
@@ -28,6 +30,11 @@ export class UserRepositoryMock implements UserRepository {
 
   async searchByUsername(username: UserUsername): Promise<Nullable<User>> {
     this.mocksSearchByUsername(username);
+    return null;
+  }
+
+  async search(id: UserId): Promise<Nullable<User>> {
+    this.mockSearch(id);
     return null;
   }
 }

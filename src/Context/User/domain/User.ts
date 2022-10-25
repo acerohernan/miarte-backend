@@ -44,7 +44,7 @@ export type UserProperties = {
 export class User extends AgregateRoot {
   readonly id: UserId;
   readonly email: UserEmail;
-  readonly password: UserPassword;
+  password: UserPassword;
   readonly username: UserUsername;
 
   readonly description: Nullable<string>;
@@ -107,6 +107,12 @@ export class User extends AgregateRoot {
     //CREATE THE "USER.CREATED" EVENT
 
     return user;
+  }
+
+  changePassword(password: UserPassword) {
+    //SEND THE "USER.PASSWORD.CHANGED" EVENT
+
+    this.password = password;
   }
 
   toPrimitives(): UserPrimitives {
