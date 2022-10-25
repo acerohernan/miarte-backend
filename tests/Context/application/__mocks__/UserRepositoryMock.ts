@@ -4,7 +4,7 @@ import { UserRepository } from "../../../../src/Context/User/domain/UserReposito
 import { UserEmail } from "../../../../src/Context/User/domain/value-object/UserEmail";
 import { UserUsername } from "../../../../src/Context/User/domain/value-object/UserUsername";
 
-export class UserReposiotryMock implements UserRepository {
+export class UserRepositoryMock implements UserRepository {
   private mocksSearchByEmail = jest.fn();
   private mocksSearchByUsername = jest.fn();
   private mockSave = jest.fn();

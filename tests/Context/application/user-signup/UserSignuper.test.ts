@@ -3,12 +3,12 @@ import { APP_EXCEPTIONS } from "../../../../src/Context/Shared/domain/exception/
 import { InvalidArgumentException } from "../../../../src/Context/Shared/domain/exception/InvalidArgumentException";
 import { UserSignuper } from "../../../../src/Context/User/application/user-signup/UserSignuper";
 import { UserMother } from "../../domain/UserMother";
-import { UserReposiotryMock } from "../__mocks__/UserReposiotryMock";
+import { UserRepositoryMock } from "../__mocks__/UserRepositoryMock";
 
 describe("UserSignuper", () => {
   it("should create a new user", async () => {
     const user = UserMother.random();
-    const repository = new UserReposiotryMock();
+    const repository = new UserRepositoryMock();
     const applicationService = new UserSignuper(repository);
 
     await applicationService.run({
@@ -23,7 +23,7 @@ describe("UserSignuper", () => {
 
   it("should throw an exception with bad email", async () => {
     try {
-      const repository = new UserReposiotryMock();
+      const repository = new UserRepositoryMock();
       const applicationService = new UserSignuper(repository);
 
       await applicationService.run({
@@ -42,7 +42,7 @@ describe("UserSignuper", () => {
 
   it("should throw an exception with bad password", async () => {
     try {
-      const repository = new UserReposiotryMock();
+      const repository = new UserRepositoryMock();
       const applicationService = new UserSignuper(repository);
 
       await applicationService.run({
@@ -61,7 +61,7 @@ describe("UserSignuper", () => {
 
   it("should throw an exception with bad username", async () => {
     try {
-      const repository = new UserReposiotryMock();
+      const repository = new UserRepositoryMock();
       const applicationService = new UserSignuper(repository);
 
       await applicationService.run({
