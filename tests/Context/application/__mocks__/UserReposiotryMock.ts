@@ -12,20 +12,22 @@ export class UserReposiotryMock implements UserRepository {
   async save(user: User): Promise<void> {
     this.mockSave(user);
   }
-  async searchByEmail(email: UserEmail): Promise<Nullable<User>> {
-    this.mocksSearchByEmail(email);
-    return null;
-  }
-  async searchByUsername(username: UserUsername): Promise<Nullable<User>> {
-    this.mocksSearchByUsername(username);
-    return null;
-  }
 
   public assertSaveHasBeenCalledWith(user: User) {
     expect(this.mockSave).toHaveBeenCalledWith(user);
   }
 
-  public assertSaveHasBeenCalled() {
-    expect(this.mockSave).toHaveBeenCalled();
+  async searchByEmail(email: UserEmail): Promise<Nullable<User>> {
+    this.mocksSearchByEmail(email);
+    return null;
+  }
+
+  public assertSearchByEmailHasBeenCalledWith(email: UserEmail) {
+    expect(this.mocksSearchByEmail).toHaveBeenLastCalledWith(email);
+  }
+
+  async searchByUsername(username: UserUsername): Promise<Nullable<User>> {
+    this.mocksSearchByUsername(username);
+    return null;
   }
 }
