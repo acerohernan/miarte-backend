@@ -37,6 +37,8 @@ export class UserSignuper {
       username: new UserUsername(params.username),
       copyright_name: null,
       copyright_url: null,
+      banner_url: null,
+      profile_url: null,
       description: null,
       name: null,
       surname: null,

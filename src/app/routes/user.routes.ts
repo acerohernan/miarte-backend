@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { UserForgotPasswordPostController } from "../controllers/user/UserForgotPasswordPostController";
 import { UserGetController } from "../controllers/user/UserGetController";
+import { UserInformationPutController } from "../controllers/user/UserInformationPutController";
 import { UserLoginPostController } from "../controllers/user/UserLoginPostController";
 import { UserRestorePasswordPostController } from "../controllers/user/UserRestorePasswordPostController";
 import { UserSignUpPostController } from "../controllers/user/UserSignUpPostController";
@@ -53,5 +54,13 @@ export function register(router: Router) {
   );
   router.get("/user/information", checkAuth, (req, res) =>
     userGetController.run(req, res)
+  );
+
+  const userInformationPutController =
+    container.get<UserInformationPutController>(
+      CONTAINER_TYPES.UserInformationPutController
+    );
+  router.put("/user/information", checkAuth, (req, res) =>
+    userInformationPutController.run(req, res)
   );
 }

@@ -64,6 +64,22 @@ Given(
   }
 );
 
+Given(
+  "I send an authenticated PUT request to {string} with body:",
+  async (route: string, body: string) => {
+    if (!_token)
+      throw new Error("You need a token to make an authenticated PUT request");
+
+    _request = request(_application.httpServer)
+      .put(route)
+      .auth(_token, { type: "bearer" })
+      .send(JSON.parse(body));
+    _response = await _request;
+
+    await wait(200);
+  }
+);
+
 Then("the response status code should be {int}", (code: number) => {
   assert.deepStrictEqual(
     code,

@@ -15,10 +15,12 @@ export type UserPrimitives = {
   copyright_url: Nullable<string>;
   name: Nullable<string>;
   surname: Nullable<string>;
-  send_special_offers: boolean;
+  profile_url: Nullable<string>;
+  banner_url: Nullable<string>;
   visible_real_name: boolean;
   show_age_in_profile: boolean;
   show_city_and_country_in_profile: boolean;
+  send_special_offers: boolean;
   allow_users_message_me: boolean;
   marketing_off_site: boolean;
 };
@@ -29,6 +31,24 @@ export type UserProperties = {
   password: UserPassword;
   username: UserUsername;
   description: Nullable<string>;
+  profile_url: Nullable<string>;
+  banner_url: Nullable<string>;
+  copyright_name: Nullable<string>;
+  copyright_url: Nullable<string>;
+  name: Nullable<string>;
+  surname: Nullable<string>;
+  send_special_offers: boolean;
+  visible_real_name: boolean;
+  show_age_in_profile: boolean;
+  show_city_and_country_in_profile: boolean;
+  allow_users_message_me: boolean;
+  marketing_off_site: boolean;
+};
+
+type UserProfileProperties = {
+  description: Nullable<string>;
+  profile_url: Nullable<string>;
+  banner_url: Nullable<string>;
   copyright_name: Nullable<string>;
   copyright_url: Nullable<string>;
   name: Nullable<string>;
@@ -47,18 +67,20 @@ export class User extends AgregateRoot {
   password: UserPassword;
   readonly username: UserUsername;
 
-  readonly description: Nullable<string>;
-  readonly copyright_name: Nullable<string>;
-  readonly copyright_url: Nullable<string>;
-  readonly name: Nullable<string>;
-  readonly surname: Nullable<string>;
+  description: Nullable<string>;
+  copyright_name: Nullable<string>;
+  copyright_url: Nullable<string>;
+  name: Nullable<string>;
+  surname: Nullable<string>;
+  profile_url: Nullable<string>;
+  banner_url: Nullable<string>;
 
-  readonly send_special_offers: boolean;
-  readonly visible_real_name: boolean;
-  readonly show_age_in_profile: boolean;
-  readonly show_city_and_country_in_profile: boolean;
-  readonly allow_users_message_me: boolean;
-  readonly marketing_off_site: boolean;
+  send_special_offers: boolean;
+  visible_real_name: boolean;
+  show_age_in_profile: boolean;
+  show_city_and_country_in_profile: boolean;
+  allow_users_message_me: boolean;
+  marketing_off_site: boolean;
 
   constructor(params: UserProperties) {
     super();
@@ -71,6 +93,8 @@ export class User extends AgregateRoot {
     this.copyright_url = params.copyright_url;
     this.name = params.name;
     this.surname = params.surname;
+    this.banner_url = params.banner_url;
+    this.profile_url = params.profile_url;
     this.send_special_offers = params.send_special_offers;
     this.visible_real_name = params.visible_real_name;
     this.show_age_in_profile = params.show_age_in_profile;
@@ -98,6 +122,8 @@ export class User extends AgregateRoot {
         primitives.show_city_and_country_in_profile,
       allow_users_message_me: primitives.allow_users_message_me,
       marketing_off_site: primitives.marketing_off_site,
+      banner_url: primitives.banner_url,
+      profile_url: primitives.profile_url,
     });
   }
 
@@ -110,9 +136,24 @@ export class User extends AgregateRoot {
   }
 
   changePassword(password: UserPassword) {
-    //SEND THE "USER.PASSWORD.CHANGED" EVENT
-
     this.password = password;
+  }
+
+  updateProfileInformation(profile: UserProfileProperties) {
+    this.description = profile.description;
+    this.copyright_name = profile.copyright_name;
+    this.copyright_url = profile.copyright_url;
+    this.name = profile.name;
+    this.surname = profile.surname;
+    this.banner_url = profile.banner_url;
+    this.profile_url = profile.profile_url;
+    this.send_special_offers = profile.send_special_offers;
+    this.visible_real_name = profile.visible_real_name;
+    this.show_age_in_profile = profile.show_age_in_profile;
+    this.show_city_and_country_in_profile =
+      profile.show_city_and_country_in_profile;
+    this.allow_users_message_me = profile.allow_users_message_me;
+    this.marketing_off_site = profile.marketing_off_site;
   }
 
   toPrimitives(): UserPrimitives {
@@ -132,6 +173,8 @@ export class User extends AgregateRoot {
       show_city_and_country_in_profile: this.show_city_and_country_in_profile,
       allow_users_message_me: this.allow_users_message_me,
       marketing_off_site: this.marketing_off_site,
+      banner_url: this.banner_url,
+      profile_url: this.profile_url,
     };
   }
 }

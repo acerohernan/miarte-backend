@@ -6,12 +6,14 @@ import { UserGetter } from "../../Context/User/application/user-get-information/
 import { UserAuthenticator } from "../../Context/User/application/user-login/UserAuthenticator";
 import { UserPasswordRestorer } from "../../Context/User/application/user-restore-password/UserPasswordRestorer";
 import { UserSignuper } from "../../Context/User/application/user-signup/UserSignuper";
+import { UserInformationUpdater } from "../../Context/User/application/user-update-information/UserInformationUpdater";
 import { UserForgotPasswordVerifier } from "../../Context/User/application/user-verify-forgot-password-code/UserForgotPasswordVerifier";
 import { UserRepository } from "../../Context/User/domain/UserRepository";
 import { TypeOrmUserRepository } from "../../Context/User/infrastructure/persistence/typeorm/TypeOrmUserRepository";
 import { StatusGetController } from "../controllers/status/StatusGetController";
 import { UserForgotPasswordPostController } from "../controllers/user/UserForgotPasswordPostController";
 import { UserGetController } from "../controllers/user/UserGetController";
+import { UserInformationPutController } from "../controllers/user/UserInformationPutController";
 import { UserLoginPostController } from "../controllers/user/UserLoginPostController";
 import { UserRestorePasswordPostController } from "../controllers/user/UserRestorePasswordPostController";
 import { UserSignUpPostController } from "../controllers/user/UserSignUpPostController";
@@ -91,6 +93,17 @@ container
   .bind<UserGetController>(CONTAINER_TYPES.UserGetController)
   .to(UserGetController);
 
+/**
+ * UserInformationPutController
+ * @description Rest Controller to update the user information
+ * @author acerohernan
+ */
+container
+  .bind<UserInformationPutController>(
+    CONTAINER_TYPES.UserInformationPutController
+  )
+  .to(UserInformationPutController);
+
 /* APPLICATION SERVICES */
 
 /**
@@ -142,6 +155,15 @@ container
  * @author acerohernan
  */
 container.bind<UserGetter>(CONTAINER_TYPES.UserGetter).to(UserGetter);
+
+/**
+ * UserInformationUpdater
+ * @description Application Service to update the user information
+ * @author aceorhernan
+ */
+container
+  .bind<UserInformationUpdater>(CONTAINER_TYPES.UserInformationUpdater)
+  .to(UserInformationUpdater);
 
 /* INFRAESTRUCTURE */
 

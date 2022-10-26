@@ -56,6 +56,13 @@ export const CONTAINER_TYPES = {
    */
   UserGetController: Symbol.for("UserGetController"),
 
+  /**
+   * UserInformationPutController
+   * @description Rest Controller to update the user information
+   * @author acerohernan
+   */
+  UserInformationPutController: Symbol.for("UserInformationPutController"),
+
   /* APPLICATION SERVICES */
 
   /**
@@ -99,6 +106,13 @@ export const CONTAINER_TYPES = {
    * @author acerohernan
    */
   UserGetter: Symbol.for("UserGetter"),
+
+  /**
+   * UserInformationUpdater
+   * @description Application Service to update the user information
+   * @author aceorhernan
+   */
+  UserInformationUpdater: Symbol.for("UserInformationUpdater"),
 
   /* INFRAESTRUCTURE */
   /**
