@@ -1,11 +1,13 @@
 import { Router } from "express";
 import { UserForgotPasswordPostController } from "../controllers/user/UserForgotPasswordPostController";
+import { UserGetController } from "../controllers/user/UserGetController";
 import { UserLoginPostController } from "../controllers/user/UserLoginPostController";
 import { UserRestorePasswordPostController } from "../controllers/user/UserRestorePasswordPostController";
 import { UserSignUpPostController } from "../controllers/user/UserSignUpPostController";
 import { UserVerifyForgotPasswordGetController } from "../controllers/user/UserVerifyForgotPasswordGetController";
 import container from "../dependency-injection";
 import { CONTAINER_TYPES } from "../dependency-injection/types";
+import { checkAuth } from "../middlewares/checkAuth";
 
 export function register(router: Router) {
   const userSignUpPostController = container.get<UserSignUpPostController>(
@@ -44,5 +46,12 @@ export function register(router: Router) {
     );
   router.post("/user/auth/password/restore", (req, res) =>
     userRestorePasswordPostController.run(req, res)
+  );
+
+  const userGetController = container.get<UserGetController>(
+    CONTAINER_TYPES.UserGetController
+  );
+  router.get("/user/information", checkAuth, (req, res) =>
+    userGetController.run(req, res)
   );
 }

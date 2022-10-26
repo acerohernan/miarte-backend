@@ -10,6 +10,7 @@ let _application: MiArteApp;
 let _environmentArranger: EnvironmentArranger;
 let _request: request.Request;
 let _response: request.Response;
+let _token: string | null = null;
 
 /* Hooks */
 BeforeAll(async () => {
@@ -35,6 +36,21 @@ Given("I send a GET request to {string}", async (route: string) => {
 
   await wait(200);
 });
+
+Given(
+  "I send an authenticated GET request to {string}",
+  async (route: string) => {
+    if (!_token)
+      throw new Error("You need a token to make an authenticated GET request");
+
+    _request = request(_application.httpServer)
+      .get(route)
+      .auth(_token, { type: "bearer" });
+    _response = await _request;
+
+    await wait(200);
+  }
+);
 
 Given(
   "I send a POST request to {string} with body:",
@@ -63,6 +79,13 @@ Then("the response body should be empty", () => {
 Then("the response body should have an error message", () => {
   if (!_response.body["error"])
     throw new Error(`The response body not have an error message`);
+});
+
+Then("the response body should have an access token", () => {
+  if (!_response.body["token"])
+    throw new Error(`The response body not have an access token`);
+
+  _token = _response.body["token"];
 });
 
 Then(

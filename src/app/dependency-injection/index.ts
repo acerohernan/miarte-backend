@@ -2,6 +2,7 @@ import { Container } from "inversify";
 import { EnvironmentArranger } from "../../../tests/Context/Shared/infrastructure/arranger/EnvironmentArranger";
 import { TypeOrmEnvironmentArranger } from "../../../tests/Context/Shared/infrastructure/typeorm/TypeOrmEnvironmentArranger";
 import { UserForgotPasswordHandler } from "../../Context/User/application/user-forgot-password/UserForgotPasswordHandler";
+import { UserGetter } from "../../Context/User/application/user-get-information/UserGetter";
 import { UserAuthenticator } from "../../Context/User/application/user-login/UserAuthenticator";
 import { UserPasswordRestorer } from "../../Context/User/application/user-restore-password/UserPasswordRestorer";
 import { UserSignuper } from "../../Context/User/application/user-signup/UserSignuper";
@@ -10,6 +11,7 @@ import { UserRepository } from "../../Context/User/domain/UserRepository";
 import { TypeOrmUserRepository } from "../../Context/User/infrastructure/persistence/typeorm/TypeOrmUserRepository";
 import { StatusGetController } from "../controllers/status/StatusGetController";
 import { UserForgotPasswordPostController } from "../controllers/user/UserForgotPasswordPostController";
+import { UserGetController } from "../controllers/user/UserGetController";
 import { UserLoginPostController } from "../controllers/user/UserLoginPostController";
 import { UserRestorePasswordPostController } from "../controllers/user/UserRestorePasswordPostController";
 import { UserSignUpPostController } from "../controllers/user/UserSignUpPostController";
@@ -80,6 +82,15 @@ container
   )
   .to(UserRestorePasswordPostController);
 
+/**
+ * UserGetController
+ * @description Rest Controller to get the user information
+ * @author acerohernan
+ */
+container
+  .bind<UserGetController>(CONTAINER_TYPES.UserGetController)
+  .to(UserGetController);
+
 /* APPLICATION SERVICES */
 
 /**
@@ -124,6 +135,13 @@ container
 container
   .bind<UserPasswordRestorer>(CONTAINER_TYPES.UserPasswordRestorer)
   .to(UserPasswordRestorer);
+
+/**
+ * UserGetter
+ * @description Application Service to get the user information
+ * @author acerohernan
+ */
+container.bind<UserGetter>(CONTAINER_TYPES.UserGetter).to(UserGetter);
 
 /* INFRAESTRUCTURE */
 

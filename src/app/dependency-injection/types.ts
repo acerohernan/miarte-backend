@@ -49,6 +49,13 @@ export const CONTAINER_TYPES = {
     "UserRestorePasswordPostController"
   ),
 
+  /**
+   * UserGetController
+   * @description Rest Controller to get the user information
+   * @author acerohernan
+   */
+  UserGetController: Symbol.for("UserGetController"),
+
   /* APPLICATION SERVICES */
 
   /**
@@ -85,6 +92,13 @@ export const CONTAINER_TYPES = {
    * @author acerohernan
    */
   UserPasswordRestorer: Symbol.for("UserPasswordRestorer"),
+
+  /**
+   * UserGetter
+   * @description Application Service to get the user information
+   * @author acerohernan
+   */
+  UserGetter: Symbol.for("UserGetter"),
 
   /* INFRAESTRUCTURE */
   /**
