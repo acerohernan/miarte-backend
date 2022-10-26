@@ -63,6 +63,13 @@ export const CONTAINER_TYPES = {
    */
   UserInformationPutController: Symbol.for("UserInformationPutController"),
 
+  /**
+   * FileImagePostController
+   * @description Rest Controller to upload an image
+   * @author acerohernan
+   */
+  FileImagePostController: Symbol.for("FileImagePostController"),
+
   /* APPLICATION SERVICES */
 
   /**

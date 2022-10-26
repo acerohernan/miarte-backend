@@ -1,0 +1,34 @@
+RUTA:
+
+Backend:
+- DDD-typescript
+- DDD-aplicado
+- typescript-avanzado
+- CQRS
+- CQRS+EventSourcing
+- Principios SOLID Aplicados
+- Arquitectura Hexagonal
+- Testing: Introducción y buenas prácticas
+- CQRS
+- Event-Driven Architecture
+- Domain-Driven Design Aplicado
+- DDD-java(optional)
+
+DevOps:
+- Docker: De 0 a deploy
+- Kubernetes para desarrolladores
+- Gestión de Logs con Loki y Grafana
+- ELK: Centraliza logs con Elastic Stack
+- Monitoring con Prometheus
+- Visualiza métricas de Prometheus con Grafana
+- Automatiza tu flujo de trabajo con GitHub Actions
+- Integración Continua con GitHub Actions
+- AWS EC2: Tu primer deploy
+- AWS: Escalando apps - Load Balancers y Auto Scaling Groups
+
+Auditorías (Casos reales):
+Auditorias y acompañamientos
+Directos privados CODELYTV (Empresas de mundo real)
+
+Frontend:
+etc, etc

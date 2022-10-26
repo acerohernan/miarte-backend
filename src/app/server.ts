@@ -12,6 +12,7 @@ import Router from "express-promise-router";
 import helmet from "helmet";
 import http from "http";
 import httpStatus from "http-status";
+import path from "path";
 import {
   AppException,
   APP_EXCEPTIONS,
@@ -64,6 +65,11 @@ export class Server {
           }
         }
       }
+    );
+
+    this.express.use(
+      "/file",
+      express.static(path.resolve(__dirname, "..", "..", "uploads"))
     );
   }
 

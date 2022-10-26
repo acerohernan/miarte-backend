@@ -10,6 +10,7 @@ import { UserInformationUpdater } from "../../Context/User/application/user-upda
 import { UserForgotPasswordVerifier } from "../../Context/User/application/user-verify-forgot-password-code/UserForgotPasswordVerifier";
 import { UserRepository } from "../../Context/User/domain/UserRepository";
 import { TypeOrmUserRepository } from "../../Context/User/infrastructure/persistence/typeorm/TypeOrmUserRepository";
+import { FileImagePostController } from "../controllers/file/FileImagePostController";
 import { StatusGetController } from "../controllers/status/StatusGetController";
 import { UserForgotPasswordPostController } from "../controllers/user/UserForgotPasswordPostController";
 import { UserGetController } from "../controllers/user/UserGetController";
@@ -103,6 +104,15 @@ container
     CONTAINER_TYPES.UserInformationPutController
   )
   .to(UserInformationPutController);
+
+/**
+ * FileImagePostController
+ * @description Rest Controller to upload an image
+ * @author acerohernan
+ */
+container
+  .bind<FileImagePostController>(CONTAINER_TYPES.FileImagePostController)
+  .to(FileImagePostController);
 
 /* APPLICATION SERVICES */
 
