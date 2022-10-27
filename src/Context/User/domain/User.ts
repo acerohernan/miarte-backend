@@ -1,4 +1,4 @@
-import { AgregateRoot } from "../../Shared/domain/AggregateRoot";
+import { AggregateRoot } from "../../Shared/domain/AggregateRoot";
 import { Nullable } from "../../Shared/domain/Nullable";
 import { UserEmail } from "./value-object/UserEmail";
 import { UserId } from "./value-object/UserId";
@@ -61,7 +61,7 @@ type UserProfileProperties = {
   marketing_off_site: boolean;
 };
 
-export class User extends AgregateRoot {
+export class User extends AggregateRoot {
   readonly id: UserId;
   readonly email: UserEmail;
   password: UserPassword;

@@ -10,6 +10,10 @@ import { UserInformationUpdater } from "../../Context/User/application/user-upda
 import { UserForgotPasswordVerifier } from "../../Context/User/application/user-verify-forgot-password-code/UserForgotPasswordVerifier";
 import { UserRepository } from "../../Context/User/domain/UserRepository";
 import { TypeOrmUserRepository } from "../../Context/User/infrastructure/persistence/typeorm/TypeOrmUserRepository";
+import { UserStepsCreator } from "../../Context/UserSteps/application/create-steps/UserStepsCreator";
+import { UserStepsFinder } from "../../Context/UserSteps/application/get-steps/UserStepsFinder";
+import { UserStepsRepository } from "../../Context/UserSteps/domain/UserStepsRepository";
+import { TypeOrmUserStepsRepository } from "../../Context/UserSteps/infrastructure/persistence/typeorm/TypeOrmUserStepsRepository";
 import { FileImagePostController } from "../controllers/file/FileImagePostController";
 import { StatusGetController } from "../controllers/status/StatusGetController";
 import { UserForgotPasswordPostController } from "../controllers/user/UserForgotPasswordPostController";
@@ -18,6 +22,7 @@ import { UserInformationPutController } from "../controllers/user/UserInformatio
 import { UserLoginPostController } from "../controllers/user/UserLoginPostController";
 import { UserRestorePasswordPostController } from "../controllers/user/UserRestorePasswordPostController";
 import { UserSignUpPostController } from "../controllers/user/UserSignUpPostController";
+import { UserStepsGetController } from "../controllers/user/UserStepsGetController";
 import { UserVerifyForgotPasswordGetController } from "../controllers/user/UserVerifyForgotPasswordGetController";
 import { CONTAINER_TYPES } from "./types";
 
@@ -114,6 +119,15 @@ container
   .bind<FileImagePostController>(CONTAINER_TYPES.FileImagePostController)
   .to(FileImagePostController);
 
+/**
+ * UserStepsGetController
+ * @description Rest Controller to get the user steps
+ * @author acerohernan
+ */
+container
+  .bind<UserStepsGetController>(CONTAINER_TYPES.UserStepsGetController)
+  .to(UserStepsGetController);
+
 /* APPLICATION SERVICES */
 
 /**
@@ -175,7 +189,34 @@ container
   .bind<UserInformationUpdater>(CONTAINER_TYPES.UserInformationUpdater)
   .to(UserInformationUpdater);
 
+/**
+ * UserStepsFinder
+ * @description Application Service to find the user steps
+ * @author acerohernan
+ */
+container
+  .bind<UserStepsFinder>(CONTAINER_TYPES.UserStepsFinder)
+  .to(UserStepsFinder);
+
+/**
+ * UserStepsCreator
+ * @description Application Service to create the user steps
+ * @author acerohernan
+ */
+container
+  .bind<UserStepsCreator>(CONTAINER_TYPES.UserStepsCreator)
+  .to(UserStepsCreator);
+
 /* INFRAESTRUCTURE */
+
+/**
+ * EnvironmentArranger
+ * @description An environment arranger for the tests features
+ * @author acerohernan
+ */
+container
+  .bind<EnvironmentArranger>(CONTAINER_TYPES.EnvironmentArranger)
+  .to(TypeOrmEnvironmentArranger);
 
 /**
  * UserRepository
@@ -187,12 +228,12 @@ container
   .to(TypeOrmUserRepository);
 
 /**
- * EnvironmentArranger
- * @description An environment arranger for the tests features
+ * UserStepsRepository
+ * @description Repository for user steps entity
  * @author acerohernan
  */
 container
-  .bind<EnvironmentArranger>(CONTAINER_TYPES.EnvironmentArranger)
-  .to(TypeOrmEnvironmentArranger);
+  .bind<UserStepsRepository>(CONTAINER_TYPES.UserStepsRepository)
+  .to(TypeOrmUserStepsRepository);
 
 export default container;

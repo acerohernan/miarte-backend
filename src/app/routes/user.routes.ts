@@ -5,6 +5,7 @@ import { UserInformationPutController } from "../controllers/user/UserInformatio
 import { UserLoginPostController } from "../controllers/user/UserLoginPostController";
 import { UserRestorePasswordPostController } from "../controllers/user/UserRestorePasswordPostController";
 import { UserSignUpPostController } from "../controllers/user/UserSignUpPostController";
+import { UserStepsGetController } from "../controllers/user/UserStepsGetController";
 import { UserVerifyForgotPasswordGetController } from "../controllers/user/UserVerifyForgotPasswordGetController";
 import container from "../dependency-injection";
 import { CONTAINER_TYPES } from "../dependency-injection/types";
@@ -62,5 +63,13 @@ export function register(router: Router) {
     );
   router.put("/user/information", checkAuth, (req, res) =>
     userInformationPutController.run(req, res)
+  );
+
+  /* User Steps */
+  const userStepsGetController = container.get<UserStepsGetController>(
+    CONTAINER_TYPES.UserStepsGetController
+  );
+  router.get("/user/steps", checkAuth, (req, res) =>
+    userStepsGetController.run(req, res)
   );
 }

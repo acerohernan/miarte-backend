@@ -43,10 +43,10 @@ Given(
   async (route: string) => {
     if (!_token)
       throw new Error("You need a token to make an authenticated GET request");
-
     _request = request(_application.httpServer)
       .get(route)
-      .auth(_token, { type: "bearer" });
+      .auth(_token, { type: "bearer" })
+      .send();
     _response = await _request;
 
     await wait(200);

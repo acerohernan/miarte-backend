@@ -2,6 +2,7 @@ import { inject, injectable } from "inversify";
 import { CONTAINER_TYPES } from "../../../../app/dependency-injection/types";
 import { DuplicatedEntityException } from "../../../Shared/domain/exception/DuplicatedEntityException";
 import { Uuid } from "../../../Shared/domain/Uuid";
+import { UserStepsCreator } from "../../../UserSteps/application/create-steps/UserStepsCreator";
 import { User } from "../../domain/User";
 import { UserRepository } from "../../domain/UserRepository";
 import { UserEmail } from "../../domain/value-object/UserEmail";
@@ -19,7 +20,9 @@ type Params = {
 @injectable()
 export class UserSignuper {
   constructor(
-    @inject(CONTAINER_TYPES.UserRepository) private repository: UserRepository
+    @inject(CONTAINER_TYPES.UserRepository) private repository: UserRepository,
+    @inject(CONTAINER_TYPES.UserStepsCreator)
+    private stepsCreator: UserStepsCreator
   ) {}
 
   async run(params: Params) {
@@ -51,6 +54,7 @@ export class UserSignuper {
     });
 
     await this.repository.save(user);
+    await this.stepsCreator.run({ user_id: user.id.value });
   }
 
   private async ensureThatUserWithTheSameEmailNotExists(email: UserEmail) {

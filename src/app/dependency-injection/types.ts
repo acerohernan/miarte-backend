@@ -70,6 +70,13 @@ export const CONTAINER_TYPES = {
    */
   FileImagePostController: Symbol.for("FileImagePostController"),
 
+  /**
+   * UserStepsGetController
+   * @description Rest Controller to get the user steps
+   * @author acerohernan
+   */
+  UserStepsGetController: Symbol.for("UserStepsGetController"),
+
   /* APPLICATION SERVICES */
 
   /**
@@ -121,7 +128,28 @@ export const CONTAINER_TYPES = {
    */
   UserInformationUpdater: Symbol.for("UserInformationUpdater"),
 
+  /**
+   * UserStepsFinder
+   * @description Application Service to find the user steps
+   * @author acerohernan
+   */
+  UserStepsFinder: Symbol.for("UserStepsFinder"),
+
+  /**
+   * UserStepsCreator
+   * @description Application Service to create the user steps
+   * @author acerohernan
+   */
+  UserStepsCreator: Symbol.for("UserStepsCreator"),
+
   /* INFRAESTRUCTURE */
+  /**
+   * EnvironmentArranger
+   * @description An environment arranger for the tests features
+   * @author acerohernan
+   */
+  EnvironmentArranger: Symbol.for("EnvironmentArranger"),
+
   /**
    * UserRepository
    * @description Repository for user entity
@@ -130,9 +158,9 @@ export const CONTAINER_TYPES = {
   UserRepository: Symbol.for("UserRepository"),
 
   /**
-   * EnvironmentArranger
-   * @description An environment arranger for the tests features
+   * UserStepsRepository
+   * @description Repository for user steps entity
    * @author acerohernan
    */
-  EnvironmentArranger: Symbol.for("EnvironmentArranger"),
+  UserStepsRepository: Symbol.for("UserStepsRepository"),
 };

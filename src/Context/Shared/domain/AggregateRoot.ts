@@ -1,10 +1,7 @@
-import { Uuid } from "./Uuid";
-
 export type AggregateRootPrimitives = {
   id: string;
 };
 
-export abstract class AgregateRoot {
-  abstract readonly id: Uuid;
+export abstract class AggregateRoot {
   abstract toPrimitives(): any;
 }
