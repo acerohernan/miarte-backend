@@ -5,8 +5,17 @@ services:
     image: postgres:15
     restart: always
     ports:
-      - "5433:5432"
+      - 5433:5432
     environment:
       - POSTGRES_USER=miarte
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=miarte_local
+  rabbitmq:
+    container_name: rabbitmq-service
+    image: rabbitmq:3-management
+    restart: always
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - ./.docker/rabbitmq:/var/lib/rabbitmq/mnesia/
