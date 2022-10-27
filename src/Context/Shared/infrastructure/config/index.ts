@@ -15,6 +15,7 @@ dotenv.config({
 
 type Env = {
   port: string;
+  url: string;
   env: string;
   jwt: { secret: string };
   typeorm: {
@@ -28,6 +29,7 @@ type Env = {
 
 const config: Env = {
   port: String(process.env.PORT),
+  url: String(process.env.URL),
   env: String(process.env.NODE_ENV),
   jwt: { secret: String(process.env.JWT_SECRET) },
   typeorm: {

@@ -32,8 +32,6 @@ export class UserInformationUpdater {
 
     if (!user) throw new NotFoundException("Not found the user information");
 
-    console.log("Params", params);
-
     user.updateProfileInformation({
       name: params.name || null,
       description: params.description || null,

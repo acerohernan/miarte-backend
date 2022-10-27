@@ -41,6 +41,7 @@ export class Server {
 
     router.use(
       (err: AppException, req: Request, res: Response, next: NextFunction) => {
+        /* App exception type */
         switch (err.type) {
           case APP_EXCEPTIONS.INVALID_ARGUMENT: {
             res.status(httpStatus.BAD_REQUEST).send({ error: err.message });
@@ -68,7 +69,7 @@ export class Server {
     );
 
     this.express.use(
-      "/file",
+      "/file/images",
       express.static(path.resolve(__dirname, "..", "..", "uploads"))
     );
   }

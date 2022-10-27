@@ -1,5 +1,6 @@
 import { AfterAll, BeforeAll, Given, Then } from "@cucumber/cucumber";
 import assert from "assert";
+import path from "path";
 import request from "supertest";
 import container from "../../../../src/app/dependency-injection";
 import { CONTAINER_TYPES } from "../../../../src/app/dependency-injection/types";
@@ -65,6 +66,75 @@ Given(
 );
 
 Given(
+  "I send an authenticated POST request to {string} with body:",
+  async (route: string, body: string) => {
+    /* const file = fs.readFileSync(path.resolve("..", "file", "utils", "valid-image.jpg" ));
+
+    const formData = new FormData();
+    formData.append("img", file); */
+
+    if (!_token)
+      throw new Error("You need a token to make an authenticated POST request");
+
+    _request = request(_application.httpServer)
+      .post(route)
+      .auth(_token, { type: "bearer" })
+      .send(JSON.parse(body));
+    _response = await _request;
+
+    await wait(100);
+  }
+);
+
+Given(
+  "I send an authenticated POST request to {string} with a valid image",
+  async (route: string) => {
+    const filePath = path.resolve(
+      __dirname,
+      "..",
+      "file",
+      "utils",
+      "valid-image.jpg"
+    );
+
+    if (!_token)
+      throw new Error("You need a token to make an authenticated POST request");
+
+    _request = request(_application.httpServer)
+      .post(route)
+      .auth(_token, { type: "bearer" })
+      .attach("img", filePath);
+    _response = await _request;
+
+    await wait(100);
+  }
+);
+
+Given(
+  "I send an authenticated POST request to {string} with an invalid image",
+  async (route: string) => {
+    const filePath = path.resolve(
+      __dirname,
+      "..",
+      "file",
+      "utils",
+      "invalid-image.txt"
+    );
+
+    if (!_token)
+      throw new Error("You need a token to make an authenticated POST request");
+
+    _request = request(_application.httpServer)
+      .post(route)
+      .auth(_token, { type: "bearer" })
+      .attach("img", filePath);
+    _response = await _request;
+
+    await wait(100);
+  }
+);
+
+Given(
   "I send an authenticated PUT request to {string} with body:",
   async (route: string, body: string) => {
     if (!_token)
@@ -79,6 +149,10 @@ Given(
     await wait(200);
   }
 );
+
+Given("I get the access token {string}", (token: string) => {
+  _token = token;
+});
 
 Then("the response status code should be {int}", (code: number) => {
   assert.deepStrictEqual(
