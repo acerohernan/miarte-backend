@@ -13,6 +13,8 @@ export class TypeOrmClientFactory {
         typeorm: { username, password, database, host, port },
       } = config;
 
+      console.log(config);
+
       const dataSource = new DataSource({
         type: "postgres",
         username,
