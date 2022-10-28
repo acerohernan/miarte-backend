@@ -142,6 +142,14 @@ export const CONTAINER_TYPES = {
    */
   UserStepsCreator: Symbol.for("UserStepsCreator"),
 
+  /* DOMAIN EVENT SUBSCRIBERS */
+  /**
+   * DomainEventSubscriber
+   * @description Name for all the domain event's subscribers
+   * @author acerohernan
+   */
+  DomainEventSubscriber: Symbol.for("DomainEventSubscriber"),
+
   /* INFRAESTRUCTURE */
   /**
    * EnvironmentArranger
@@ -149,6 +157,20 @@ export const CONTAINER_TYPES = {
    * @author acerohernan
    */
   EnvironmentArranger: Symbol.for("EnvironmentArranger"),
+
+  /**
+   * EventBus
+   * @description Asynchronous bus to send and consume the domain events
+   * @author acerohernan
+   */
+  EventBus: Symbol.for("EventBus"),
+
+  /**
+   * RabbitMqConnection
+   * @description RabbitMq connection
+   * @author acerohernan
+   */
+  RabbitMqConnection: Symbol.for("RabbitMqConnection"),
 
   /**
    * UserRepository

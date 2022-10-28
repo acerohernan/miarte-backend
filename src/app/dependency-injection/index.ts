@@ -1,6 +1,9 @@
 import { Container } from "inversify";
 import { EnvironmentArranger } from "../../../tests/Context/Shared/infrastructure/arranger/EnvironmentArranger";
 import { TypeOrmEnvironmentArranger } from "../../../tests/Context/Shared/infrastructure/typeorm/TypeOrmEnvironmentArranger";
+import { EventBus } from "../../Context/Shared/domain/EventBus";
+import { RabbitMqConnection } from "../../Context/Shared/infrastructure/event-bus/rabbitmq/RabbitMqConnection";
+import { RabbitMqEventBus } from "../../Context/Shared/infrastructure/event-bus/rabbitmq/RabbitMqEventBus";
 import { UserForgotPasswordHandler } from "../../Context/User/application/user-forgot-password/UserForgotPasswordHandler";
 import { UserGetter } from "../../Context/User/application/user-get-information/UserGetter";
 import { UserAuthenticator } from "../../Context/User/application/user-login/UserAuthenticator";
@@ -10,6 +13,7 @@ import { UserInformationUpdater } from "../../Context/User/application/user-upda
 import { UserForgotPasswordVerifier } from "../../Context/User/application/user-verify-forgot-password-code/UserForgotPasswordVerifier";
 import { UserRepository } from "../../Context/User/domain/UserRepository";
 import { TypeOrmUserRepository } from "../../Context/User/infrastructure/persistence/typeorm/TypeOrmUserRepository";
+import { CreateUserStepsOnUserCreated } from "../../Context/UserSteps/application/create-steps/CreateUserStepsOnUserCreated";
 import { UserStepsCreator } from "../../Context/UserSteps/application/create-steps/UserStepsCreator";
 import { UserStepsFinder } from "../../Context/UserSteps/application/get-steps/UserStepsFinder";
 import { UserStepsRepository } from "../../Context/UserSteps/domain/UserStepsRepository";
@@ -207,6 +211,16 @@ container
   .bind<UserStepsCreator>(CONTAINER_TYPES.UserStepsCreator)
   .to(UserStepsCreator);
 
+/* DOMAIN EVENT SUBSCRIBERS */
+/**
+ * DomainEventSubscriber
+ * @description Name for all the domain event's subscribers
+ * @author acerohernan
+ */
+container
+  .bind<CreateUserStepsOnUserCreated>(CONTAINER_TYPES.DomainEventSubscriber)
+  .to(CreateUserStepsOnUserCreated);
+
 /* INFRAESTRUCTURE */
 
 /**
@@ -217,6 +231,22 @@ container
 container
   .bind<EnvironmentArranger>(CONTAINER_TYPES.EnvironmentArranger)
   .to(TypeOrmEnvironmentArranger);
+
+/**
+ * EventBus
+ * @description Asynchronous bus to send and consume the domain events
+ * @author acerohernan
+ */
+container.bind<EventBus>(CONTAINER_TYPES.EventBus).to(RabbitMqEventBus);
+
+/**
+ * RabbitMqConnection
+ * @description RabbitMq connection
+ * @author acerohernan
+ */
+container
+  .bind<RabbitMqConnection>(CONTAINER_TYPES.RabbitMqConnection)
+  .to(RabbitMqConnection);
 
 /**
  * UserRepository

@@ -6,6 +6,7 @@ import { EnvironmentArranger } from "../arranger/EnvironmentArranger";
 @injectable()
 export class TypeOrmEnvironmentArranger implements EnvironmentArranger {
   async client(): Promise<DataSource> {
+    await TypeOrmClientFactory.createClient();
     return TypeOrmClientFactory.getConnection();
   }
 

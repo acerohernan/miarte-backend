@@ -5,6 +5,8 @@ export class TypeOrmClientFactory {
   static connection?: DataSource;
 
   static async createClient(): Promise<void> {
+    if (this.connection !== undefined) return;
+
     try {
       const {
         env,

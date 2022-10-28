@@ -1,5 +1,6 @@
 import { AggregateRoot } from "../../Shared/domain/AggregateRoot";
 import { Nullable } from "../../Shared/domain/Nullable";
+import { UserCreatedDomainEvent } from "./events/UserCreatedDomainEvent";
 import { UserEmail } from "./value-object/UserEmail";
 import { UserId } from "./value-object/UserId";
 import { UserPassword } from "./value-object/UserPassword";
@@ -130,7 +131,27 @@ export class User extends AggregateRoot {
   static create(properties: UserProperties): User {
     const user = new User(properties);
 
-    //CREATE THE "USER.CREATED" EVENT
+    user.record(
+      new UserCreatedDomainEvent({
+        aggregateId: user.id.value,
+        email: user.email.value,
+        password: user.password.value,
+        username: user.username.value,
+        description: user.description,
+        copyright_name: user.copyright_name,
+        copyright_url: user.copyright_url,
+        name: user.name,
+        surname: user.surname,
+        profile_url: user.profile_url,
+        banner_url: user.banner_url,
+        visible_real_name: user.visible_real_name,
+        show_age_in_profile: user.show_age_in_profile,
+        show_city_and_country_in_profile: user.show_city_and_country_in_profile,
+        send_special_offers: user.send_special_offers,
+        allow_users_message_me: user.allow_users_message_me,
+        marketing_off_site: user.marketing_off_site,
+      })
+    );
 
     return user;
   }

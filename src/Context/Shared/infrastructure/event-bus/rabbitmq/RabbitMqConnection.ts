@@ -1,4 +1,5 @@
 import amqplib, { ConsumeMessage } from "amqplib";
+import { injectable } from "inversify";
 
 type RabbitMqPublicationParams = {
   exchange: string;
@@ -13,11 +14,13 @@ type RabbitMqPublicationParams = {
   };
 };
 
+@injectable()
 export class RabbitMqConnection {
   private connection?: amqplib.Connection;
   private channel?: amqplib.ConfirmChannel;
 
   async connect() {
+    console.log("RabbitMq conected");
     this.connection = await this.createConnection();
     this.channel = await this.createChannel();
   }
@@ -148,5 +151,9 @@ export class RabbitMqConnection {
     }
 
     return args;
+  }
+
+  public connectionExists(): boolean {
+    return this.channel !== undefined;
   }
 }

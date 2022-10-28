@@ -1,8 +1,8 @@
 import { inject, injectable } from "inversify";
 import { CONTAINER_TYPES } from "../../../../app/dependency-injection/types";
+import { EventBus } from "../../../Shared/domain/EventBus";
 import { DuplicatedEntityException } from "../../../Shared/domain/exception/DuplicatedEntityException";
 import { Uuid } from "../../../Shared/domain/Uuid";
-import { UserStepsCreator } from "../../../UserSteps/application/create-steps/UserStepsCreator";
 import { User } from "../../domain/User";
 import { UserRepository } from "../../domain/UserRepository";
 import { UserEmail } from "../../domain/value-object/UserEmail";
@@ -21,8 +21,7 @@ type Params = {
 export class UserSignuper {
   constructor(
     @inject(CONTAINER_TYPES.UserRepository) private repository: UserRepository,
-    @inject(CONTAINER_TYPES.UserStepsCreator)
-    private stepsCreator: UserStepsCreator
+    @inject(CONTAINER_TYPES.EventBus) private eventBus: EventBus
   ) {}
 
   async run(params: Params) {
@@ -54,7 +53,7 @@ export class UserSignuper {
     });
 
     await this.repository.save(user);
-    await this.stepsCreator.run({ user_id: user.id.value });
+    await this.eventBus.publish(user.pullDomainEvents());
   }
 
   private async ensureThatUserWithTheSameEmailNotExists(email: UserEmail) {
@@ -62,7 +61,7 @@ export class UserSignuper {
 
     if (user)
       throw new DuplicatedEntityException(
-        `The email ${email} is taken, please use another.`
+        `The email ${email.value} is taken, please use another.`
       );
   }
 
@@ -73,7 +72,7 @@ export class UserSignuper {
 
     if (user)
       throw new DuplicatedEntityException(
-        `The username ${username} is taken, please use another.`
+        `The username ${username.value} is taken, please use another.`
       );
   }
 }

@@ -1,38 +1,15 @@
-import { AfterAll, BeforeAll, Given, Then } from "@cucumber/cucumber";
+import { Given, Then } from "@cucumber/cucumber";
 import assert from "assert";
 import path from "path";
 import request from "supertest";
-import container from "../../../../src/app/dependency-injection";
-import { CONTAINER_TYPES } from "../../../../src/app/dependency-injection/types";
-import { MiArteApp } from "../../../../src/app/MiArteApp";
-import { EnvironmentArranger } from "../../../Context/Shared/infrastructure/arranger/EnvironmentArranger";
+import { application } from "./hooks.steps";
 
-let _application: MiArteApp;
-let _environmentArranger: EnvironmentArranger;
 let _request: request.Request;
 let _response: request.Response;
 let _token: string | null = null;
 
-/* Hooks */
-BeforeAll(async () => {
-  _application = new MiArteApp();
-
-  _environmentArranger = container.get<EnvironmentArranger>(
-    CONTAINER_TYPES.EnvironmentArranger
-  );
-
-  await _application.start();
-  await _environmentArranger.arrange();
-});
-
-AfterAll(async () => {
-  await _application.stop();
-  //await _environmentArranger.close();
-});
-
-/* Steps */
 Given("I send a GET request to {string}", async (route: string) => {
-  _request = request(_application.httpServer).get(route);
+  _request = request(application.httpServer).get(route);
   _response = await _request;
 
   await wait(200);
@@ -44,7 +21,7 @@ Given(
     if (!_token)
       throw new Error("You need a token to make an authenticated GET request");
 
-    _request = request(_application.httpServer)
+    _request = request(application.httpServer)
       .get(route)
       .auth(_token, { type: "bearer" });
     _response = await _request;
@@ -56,7 +33,7 @@ Given(
 Given(
   "I send a POST request to {string} with body:",
   async (route: string, body: string) => {
-    _request = request(_application.httpServer)
+    _request = request(application.httpServer)
       .post(route)
       .send(JSON.parse(body));
     _response = await _request;
@@ -71,7 +48,7 @@ Given(
     if (!_token)
       throw new Error("You need a token to make an authenticated POST request");
 
-    _request = request(_application.httpServer)
+    _request = request(application.httpServer)
       .post(route)
       .auth(_token, { type: "bearer" })
       .send(JSON.parse(body));
@@ -95,7 +72,7 @@ Given(
     if (!_token)
       throw new Error("You need a token to make an authenticated POST request");
 
-    _request = request(_application.httpServer)
+    _request = request(application.httpServer)
       .post(route)
       .auth(_token, { type: "bearer" })
       .attach("img", filePath);
@@ -119,7 +96,7 @@ Given(
     if (!_token)
       throw new Error("You need a token to make an authenticated POST request");
 
-    _request = request(_application.httpServer)
+    _request = request(application.httpServer)
       .post(route)
       .auth(_token, { type: "bearer" })
       .attach("img", filePath);
@@ -135,7 +112,7 @@ Given(
     if (!_token)
       throw new Error("You need a token to make an authenticated PUT request");
 
-    _request = request(_application.httpServer)
+    _request = request(application.httpServer)
       .put(route)
       .auth(_token, { type: "bearer" })
       .send(JSON.parse(body));

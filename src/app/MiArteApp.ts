@@ -1,10 +1,10 @@
 import "reflect-metadata";
 import { DomainEventSubscribers } from "../Context/Shared/domain/DomainEventSubscribers";
+import { EventBus } from "../Context/Shared/domain/EventBus";
 import config from "../Context/Shared/infrastructure/config";
-import { RabbitMqConfigurer } from "../Context/Shared/infrastructure/event-bus/rabbitmq/RabbitMqConfigurer";
-import { RabbitMqConnection } from "../Context/Shared/infrastructure/event-bus/rabbitmq/RabbitMqConnection";
 import { TypeOrmClientFactory } from "../Context/Shared/infrastructure/persistence/typeorm/TypeOrmClientFactory";
 import container from "./dependency-injection";
+import { CONTAINER_TYPES } from "./dependency-injection/types";
 import { Server } from "./server";
 
 export class MiArteApp {
@@ -26,13 +26,9 @@ export class MiArteApp {
   }
 
   async confireEventBus() {
-    const connection = new RabbitMqConnection();
-    await connection.connect();
-
-    const subscribers = DomainEventSubscribers.from(container).items;
-
-    const configurer = new RabbitMqConfigurer(connection);
-    await configurer.configure({ exchange: "domain_events", subscribers });
+    const eventBus = container.get<EventBus>(CONTAINER_TYPES.EventBus);
+    const subscribers = DomainEventSubscribers.from(container);
+    await eventBus.addSubscribers(subscribers);
   }
 
   async connectDatabase() {

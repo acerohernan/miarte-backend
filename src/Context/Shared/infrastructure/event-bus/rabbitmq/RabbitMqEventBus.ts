@@ -1,3 +1,5 @@
+import { inject, injectable } from "inversify";
+import { CONTAINER_TYPES } from "../../../../../app/dependency-injection/types";
 import { DomainEvent } from "../../../domain/DomainEvent";
 import { DomainEventSubscriber } from "../../../domain/DomainEventSubscriber";
 import { DomainEventSubscribers } from "../../../domain/DomainEventSubscribers";
@@ -6,13 +8,19 @@ import { DomainEventDeserializer } from "../DomainEventDeserializer";
 import { RabbitMqConnection } from "./RabbitMqConnection";
 import { RabbitMqConsumerFactory } from "./RabbitMqConsumerFactory";
 
+@injectable()
 export class RabbitMqEventBus implements EventBus {
   private exchange: string = "domain_events";
   private moduleName: string = "miarte";
 
-  constructor(private connection: RabbitMqConnection) {}
+  constructor(
+    @inject(CONTAINER_TYPES.RabbitMqConnection)
+    private connection: RabbitMqConnection
+  ) {}
 
   async addSubscribers(subscribers: DomainEventSubscribers): Promise<void> {
+    await this.connectToRabbitMq();
+
     const deserializer = DomainEventDeserializer.configure(subscribers);
     const consumerFactory = new RabbitMqConsumerFactory(
       this.connection,
@@ -35,6 +43,8 @@ export class RabbitMqEventBus implements EventBus {
   }
 
   async publish(events: DomainEvent[]): Promise<void> {
+    await this.connectToRabbitMq();
+
     for (const event of events) {
       try {
         const routingKey = event.eventName;
@@ -83,5 +93,17 @@ export class RabbitMqEventBus implements EventBus {
       .join("_")
       .toLowerCase();
     return `${this.moduleName}.${name}`;
+  }
+
+  private async connectToRabbitMq(): Promise<void> {
+    if (this.connection.connectionExists()) return;
+
+    await this.connection.connect();
+  }
+
+  private async disconnectToRabbitMq(): Promise<void> {
+    if (!this.connection.connectionExists()) return;
+
+    await this.connection.close();
   }
 }
