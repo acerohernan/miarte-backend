@@ -20,8 +20,6 @@ export class UserStepsFinder {
       new UserId(params.user_id)
     );
 
-    console.log(steps, params.user_id);
-
     if (!steps)
       throw new NotFoundException(`The steps for the user not exists`);
 

@@ -43,10 +43,10 @@ Given(
   async (route: string) => {
     if (!_token)
       throw new Error("You need a token to make an authenticated GET request");
+
     _request = request(_application.httpServer)
       .get(route)
-      .auth(_token, { type: "bearer" })
-      .send();
+      .auth(_token, { type: "bearer" });
     _response = await _request;
 
     await wait(200);
@@ -68,11 +68,6 @@ Given(
 Given(
   "I send an authenticated POST request to {string} with body:",
   async (route: string, body: string) => {
-    /* const file = fs.readFileSync(path.resolve("..", "file", "utils", "valid-image.jpg" ));
-
-    const formData = new FormData();
-    formData.append("img", file); */
-
     if (!_token)
       throw new Error("You need a token to make an authenticated POST request");
 

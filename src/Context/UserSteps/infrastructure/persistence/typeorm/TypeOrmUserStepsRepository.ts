@@ -25,8 +25,6 @@ export class TypeOrmUserStepsRepository
       user_id: userId.value,
     });
 
-    console.log(stepsPrimitives, "Repo");
-
     if (!stepsPrimitives) return null;
 
     return UserSteps.fromPrimtives(stepsPrimitives);
