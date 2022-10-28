@@ -8,7 +8,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: ["16.18.0"]
         rabbitmq-version: ["3.8.2-management-alpine"]
 
     steps:
