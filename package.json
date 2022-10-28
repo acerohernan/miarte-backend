@@ -14,7 +14,7 @@
     "test:unit": "set NODE_ENV=test&& jest",
     "test:features": "set NODE_ENV=test&& cucumber-js",
     "config:rabbitmq": "set NODE_ENV=production&& ts-node src/app/commands/runConfigureRabbitMqCommand.ts",
-    "build": "yarn build:clean && yarn build:tsc && yarn build:di",
+    "build": "yarn build:tsc",
     "build:clean": "rm -r dist",
     "build:tsc": "tsc -p ./tsconfig.prod.json",
     "build:di": "xcopy .env.production dist && cd dist && mkdir uploads",
