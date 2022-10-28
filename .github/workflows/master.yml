@@ -9,6 +9,7 @@ jobs:
     strategy:
       matrix:
         node-version: [16.x]
+        rabbitmq-version: ["3.8.2-management-alpine"]
 
     steps:
       - uses: actions/checkout@v3
@@ -17,7 +18,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+      - name: Launch RabbitMQ
+        uses: nijel/rabbitmq-action@v1.0.0
+        with:
+          rabbitmq version: ${{ matrix.rabbitmq-version }}
 
-      - name: Run a echo to prove that it works
+      - name: See the directories
         run: |
-          sudo echo "It works"
+          ls -1

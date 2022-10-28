@@ -5,18 +5,18 @@ Feature: Forgot Password
 
     Scenario: A registered email
         Given I send a POST request to "/user/auth/signup" with body:
-        """
-        {
-            "email": "forgot@test.com",
-            "password": "Password1",
-            "username": "forgotuser"
-        }
-        """
+            """
+            {
+                "email": "forgot@test.com",
+                "password": "Password1",
+                "username": "forgotuser"
+            }
+            """
         Then I send a POST request to "/user/auth/password/forgot" with body:
-        """
-        {
-            "email": "forgot@test.com"
-        }
-        """
+            """
+            {
+                "email": "forgot@test.com"
+            }
+            """
         Then the response status code should be 200
         And the response body should have the property "code"

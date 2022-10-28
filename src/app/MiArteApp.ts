@@ -1,7 +1,6 @@
 import "reflect-metadata";
 import { DomainEventSubscribers } from "../Context/Shared/domain/DomainEventSubscribers";
 import { EventBus } from "../Context/Shared/domain/EventBus";
-import config from "../Context/Shared/infrastructure/config";
 import { TypeOrmClientFactory } from "../Context/Shared/infrastructure/persistence/typeorm/TypeOrmClientFactory";
 import container from "./dependency-injection";
 import { CONTAINER_TYPES } from "./dependency-injection/types";
@@ -11,7 +10,7 @@ export class MiArteApp {
   server?: Server;
 
   async start() {
-    const port = config.port || "5000";
+    const port = process.env.PORT || "5000";
     this.server = new Server(port);
 
     //configurations

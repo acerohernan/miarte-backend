@@ -3,7 +3,9 @@ import fs from "fs";
 
 export function registerRoutes(router: Router) {
   const filenames = fs.readdirSync(__dirname);
-  const routes = filenames.filter((filename) => filename !== "index.ts");
+  const routes = filenames.filter(
+    (filename) => filename !== "index.ts" && filename !== "index.js"
+  );
 
   routes.map((route) => registerRoute(route, router));
 }
