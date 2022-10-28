@@ -2,14 +2,23 @@ import "reflect-metadata";
 import { APP_EXCEPTIONS } from "../../../../../src/Context/Shared/domain/exception/AppException";
 import { InvalidArgumentException } from "../../../../../src/Context/Shared/domain/exception/InvalidArgumentException";
 import { UserSignuper } from "../../../../../src/Context/User/application/user-signup/UserSignuper";
+import { EventBusMock } from "../../../Shared/domain/EventBusMock";
 import { UserMother } from "../../domain/UserMother";
 import { UserRepositoryMock } from "../__mocks__/UserRepositoryMock";
+
+let repository: UserRepositoryMock;
+let eventBus: EventBusMock;
+let applicationService: UserSignuper;
+
+beforeEach(() => {
+  repository = new UserRepositoryMock();
+  eventBus = new EventBusMock();
+  applicationService = new UserSignuper(repository, eventBus);
+});
 
 describe("UserSignuper", () => {
   it("should create a new user", async () => {
     const user = UserMother.random();
-    const repository = new UserRepositoryMock();
-    const applicationService = new UserSignuper(repository);
 
     await applicationService.run({
       id: user.id.value,
@@ -23,9 +32,6 @@ describe("UserSignuper", () => {
 
   it("should throw an exception with bad email", async () => {
     try {
-      const repository = new UserRepositoryMock();
-      const applicationService = new UserSignuper(repository);
-
       await applicationService.run({
         email: "asdsdas",
         password: "Password1",
@@ -42,9 +48,6 @@ describe("UserSignuper", () => {
 
   it("should throw an exception with bad password", async () => {
     try {
-      const repository = new UserRepositoryMock();
-      const applicationService = new UserSignuper(repository);
-
       await applicationService.run({
         email: "test@test.com",
         password: "dfssdf",
@@ -61,9 +64,6 @@ describe("UserSignuper", () => {
 
   it("should throw an exception with bad username", async () => {
     try {
-      const repository = new UserRepositoryMock();
-      const applicationService = new UserSignuper(repository);
-
       await applicationService.run({
         email: "test@test.com",
         password: "Password1",

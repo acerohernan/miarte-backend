@@ -37,6 +37,14 @@ export const UserEntity = new EntitySchema({
       type: "varchar",
       nullable: true,
     },
+    banner_url: {
+      type: "varchar",
+      nullable: true,
+    },
+    profile_url: {
+      type: "varchar",
+      nullable: true,
+    },
     allow_users_message_me: {
       type: "bool",
       default: false,

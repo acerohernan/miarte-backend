@@ -12,6 +12,8 @@ export class UserMother {
       description: null,
       name: null,
       surname: null,
+      banner_url: null,
+      profile_url: null,
       allow_users_message_me: false,
       marketing_off_site: false,
       send_special_offers: false,
