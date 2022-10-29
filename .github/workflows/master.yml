@@ -21,3 +21,6 @@ jobs:
       - name: yarn check:env
         run: |
           yarn check:env
+        env:
+          TYPEORM_USERNAME: ${{ secrets.TYPEORM_USERNAME }}
+          TYPEORM_PASSWORD: ${{ secrets.TYPEORM_PASSWORD }}
