@@ -43,9 +43,13 @@ jobs:
         run: |
           yarn
 
-      - name: yarn test:unit
+      - name: yarn build
         run: |
-          yarn test:unit
+          yarn build
+
+      - name: yarn test
+        run: |
+          yarn test
         env:
           PORT: 5000
           NODE_ENV: test
