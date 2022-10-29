@@ -49,6 +49,7 @@ jobs:
 
       - name: yarn test
         run: |
+          yarn config:rabbitmq
           yarn test
         env:
           PORT: 5000
