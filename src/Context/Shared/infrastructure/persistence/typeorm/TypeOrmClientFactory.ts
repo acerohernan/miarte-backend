@@ -7,6 +7,8 @@ export class TypeOrmClientFactory {
   static async createClient(): Promise<void> {
     if (this.connection !== undefined) return;
 
+    console.log(config);
+
     try {
       const {
         env,
