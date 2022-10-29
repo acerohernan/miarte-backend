@@ -32,7 +32,7 @@ export class TypeOrmClientFactory {
           __dirname +
             "/../../../../**/**/infrastructure/persistence/typeorm/*{.js,.ts}",
         ],
-        synchronize: env === "development" /* Disable for production */,
+        synchronize: env !== "production" /* Disable for production */,
       });
 
       const connection = await dataSource.initialize();
