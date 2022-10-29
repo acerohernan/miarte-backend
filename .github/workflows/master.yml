@@ -22,5 +22,11 @@ jobs:
         run: |
           yarn check:env
         env:
-          TYPEORM_DATABASE: "miarte_local"
-          TYPEORM_HOST: "localhost"
+          PORT: 5000
+          URL: http://localhost:5000
+          JWT_SECRET: miartesecreto
+          TYPEORM_USERNAME: miarte
+          TYPEORM_PASSWORD: password
+          TYPEORM_HOST: localhost
+          TYPEORM_PORT: 5433
+          TYPEORM_DATABASE: miarte_local
