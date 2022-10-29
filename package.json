@@ -18,7 +18,8 @@
     "build:clean": "rm -r dist",
     "build:tsc": "tsc -p ./tsconfig.prod.json",
     "build:di": "xcopy .env.production dist && cd dist && mkdir uploads",
-    "start": "set NODE_ENV=production&& node dist/src/app/start.js"
+    "start": "set NODE_ENV=production&& node dist/src/app/start.js",
+    "check:env": "set NODE_ENV=production&& ts-node src/app/commands/runCheckEnvironmentVariables"
   },
   "keywords": [],
   "author": "acerohernan",

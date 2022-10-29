@@ -6,24 +6,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: ["16.18.0"]
-        rabbitmq-version: ["3.8.2-management-alpine"]
-
-    services:
-      postgres:
-        image: postgres
-        env:
-          POSTGRES_PASSWORD: password
-          POSTGRES_USER: miarte
-          POSTGRES_DB: miarte_local
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-
     steps:
       - uses: actions/checkout@v3
 
@@ -32,19 +14,10 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Launch RabbitMQ
-        uses: nijel/rabbitmq-action@v1.0.0
-        with:
-          rabbitmq version: ${{ matrix.rabbitmq-version }}
-
       - name: yarn install
         run: |
           yarn
 
-      - name: yarn build
+      - name: yarn check:env
         run: |
-          yarn build
-
-      - name: yarn test:unit
-        run: |
-          yarn test:unit
+          yarn check:env

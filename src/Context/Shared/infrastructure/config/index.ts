@@ -13,18 +13,6 @@ dotenv.config({
   ),
 });
 
-console.log({
-  path: path.resolve(
-    __dirname,
-    "..",
-    "..",
-    "..",
-    "..",
-    "..",
-    `.env.${process.env.NODE_ENV}`
-  ),
-});
-
 type Env = {
   port: string;
   url: string;
