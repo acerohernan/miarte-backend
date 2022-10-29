@@ -5,6 +5,7 @@ const miarteapp = [
   "tests/app/features/**/*.feature",
   "--require tests/app/features/step_definitions/*.steps.ts",
   "--publish-quiet",
+  "--exit",
 ].join(" ");
 
 module.exports = { default: miarteapp };
