@@ -1,5 +1,6 @@
 import amqplib, { ConsumeMessage } from "amqplib";
 import { injectable } from "inversify";
+import config from "../../config";
 
 type RabbitMqPublicationParams = {
   exchange: string;
@@ -20,19 +21,22 @@ export class RabbitMqConnection {
   private channel?: amqplib.ConfirmChannel;
 
   async connect() {
-    console.log("RabbitMq conected");
     this.connection = await this.createConnection();
     this.channel = await this.createChannel();
+    console.log("RabbitMq conected");
   }
 
   private async createConnection(): Promise<amqplib.Connection> {
+    const {
+      rabbitmq: { vhost, username, password, hostname, port, secure },
+    } = config;
     const connection = await amqplib.connect({
-      vhost: "/",
-      username: "guest",
-      password: "guest",
-      protocol: "amqp",
-      hostname: "localhost",
-      port: 5672,
+      vhost,
+      username,
+      password,
+      protocol: secure ? "amqps" : "amqp",
+      hostname,
+      port,
     });
 
     connection.on("error", (err: any) => {

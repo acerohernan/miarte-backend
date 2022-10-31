@@ -1,6 +1,8 @@
 name: Node CI
 
-on: [push]
+on:
+  push:
+    branches: [master]
 
 jobs:
   build:
@@ -61,3 +63,11 @@ jobs:
           TYPEORM_HOST: localhost
           TYPEORM_PORT: 5432
           TYPEORM_DATABASE: miarte_local
+          RABBITMQ_VHOST: /
+          RABBITMQ_USERNAME: guest
+          RABBITMQ_PASSWORD: guest
+          RABBITMQ_HOSTNAME: localhost
+          RABBITMQ_PORT: 5672
+          RABBITMQ_SECURE: false
+          RABBITMQ_EXCHANGE_NAME: domain_events
+          RABBITMQ_MODULE_NAME: miarte

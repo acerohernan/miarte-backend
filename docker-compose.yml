@@ -5,11 +5,14 @@ services:
     image: postgres:15
     restart: always
     ports:
-      - 5433:5432
+      - 5432:5432
     environment:
       - POSTGRES_USER=miarte
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=miarte_local
+    networks:
+      - api-network
+
   rabbitmq:
     container_name: rabbitmq-service
     image: rabbitmq:3-management
@@ -19,3 +22,23 @@ services:
       - 15672:15672
     volumes:
       - ./.docker/rabbitmq:/var/lib/rabbitmq/mnesia/
+    networks:
+      - api-network
+
+  miarte-service:
+    container_name: miarte-service
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    build:
+      context: ./
+    networks:
+      - api-network
+    ports:
+      - 80:5000
+    depends_on:
+      - postgres
+      - rabbitmq
+
+networks:
+  api-network:

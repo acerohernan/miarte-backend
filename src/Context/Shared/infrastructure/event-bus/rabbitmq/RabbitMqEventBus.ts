@@ -4,14 +4,15 @@ import { DomainEvent } from "../../../domain/DomainEvent";
 import { DomainEventSubscriber } from "../../../domain/DomainEventSubscriber";
 import { DomainEventSubscribers } from "../../../domain/DomainEventSubscribers";
 import { EventBus } from "../../../domain/EventBus";
+import config from "../../config";
 import { DomainEventDeserializer } from "../DomainEventDeserializer";
 import { RabbitMqConnection } from "./RabbitMqConnection";
 import { RabbitMqConsumerFactory } from "./RabbitMqConsumerFactory";
 
 @injectable()
 export class RabbitMqEventBus implements EventBus {
-  private exchange: string = "domain_events";
-  private moduleName: string = "miarte";
+  private exchange: string = config.rabbitmq.exchangeName;
+  private moduleName: string = config.rabbitmq.moduleName;
 
   constructor(
     @inject(CONTAINER_TYPES.RabbitMqConnection)
@@ -99,11 +100,5 @@ export class RabbitMqEventBus implements EventBus {
     if (this.connection.connectionExists()) return;
 
     await this.connection.connect();
-  }
-
-  private async disconnectToRabbitMq(): Promise<void> {
-    if (!this.connection.connectionExists()) return;
-
-    await this.connection.close();
   }
 }
