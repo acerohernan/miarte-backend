@@ -32,16 +32,16 @@ export const CONTAINER_TYPES = {
   ),
 
   /**
-   * UserVerifyForgotPasswordGetController
+   * UserVerifyForgotPasswordPostController
    * @description Rest Controller to verify the forgot password code
    * @author acerohernan
    */
-  UserVerifyForgotPasswordGetController: Symbol.for(
-    "UserVerifyForgotPasswordGetController"
+  UserVerifyForgotPasswordPostController: Symbol.for(
+    "UserVerifyForgotPasswordPostController"
   ),
 
   /**
-   * UserVerifyForgotPasswordGetController
+   * UserRestorePasswordPostController
    * @description Rest Controller to restore the user password with forgot password code
    * @author acerohernan
    */

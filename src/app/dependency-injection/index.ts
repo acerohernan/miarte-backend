@@ -27,7 +27,7 @@ import { UserLoginPostController } from "../controllers/user/UserLoginPostContro
 import { UserRestorePasswordPostController } from "../controllers/user/UserRestorePasswordPostController";
 import { UserSignUpPostController } from "../controllers/user/UserSignUpPostController";
 import { UserStepsGetController } from "../controllers/user/UserStepsGetController";
-import { UserVerifyForgotPasswordGetController } from "../controllers/user/UserVerifyForgotPasswordGetController";
+import { UserVerifyForgotPasswordPostController } from "../controllers/user/UserVerifyForgotPasswordPostController";
 import { CONTAINER_TYPES } from "./types";
 
 const container = new Container();
@@ -73,15 +73,15 @@ container
   .to(UserForgotPasswordPostController);
 
 /**
- * UserVerifyForgotPasswordGetController
+ * UserVerifyForgotPasswordPostController
  * @description Rest Controller to verify the forgot password code
  * @author acerohernan
  */
 container
-  .bind<UserVerifyForgotPasswordGetController>(
-    CONTAINER_TYPES.UserVerifyForgotPasswordGetController
+  .bind<UserVerifyForgotPasswordPostController>(
+    CONTAINER_TYPES.UserVerifyForgotPasswordPostController
   )
-  .to(UserVerifyForgotPasswordGetController);
+  .to(UserVerifyForgotPasswordPostController);
 
 /**
  * UserRestorePasswordPostController

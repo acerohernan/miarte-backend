@@ -7,7 +7,7 @@ import { CONTAINER_TYPES } from "../../dependency-injection/types";
 import { Controller } from "../Controller";
 
 @injectable()
-export class UserVerifyForgotPasswordGetController implements Controller {
+export class UserVerifyForgotPasswordPostController implements Controller {
   constructor(
     @inject(CONTAINER_TYPES.UserForgotPasswordVerifier)
     private verifier: UserForgotPasswordVerifier
@@ -16,7 +16,7 @@ export class UserVerifyForgotPasswordGetController implements Controller {
     req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>,
     res: Response<any, Record<string, any>>
   ): Promise<void> {
-    const { code } = req.query;
+    const { code } = req.body;
 
     await this.verifier.run({ code: String(code) });
     res.status(200).send();

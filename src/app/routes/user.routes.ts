@@ -6,7 +6,7 @@ import { UserLoginPostController } from "../controllers/user/UserLoginPostContro
 import { UserRestorePasswordPostController } from "../controllers/user/UserRestorePasswordPostController";
 import { UserSignUpPostController } from "../controllers/user/UserSignUpPostController";
 import { UserStepsGetController } from "../controllers/user/UserStepsGetController";
-import { UserVerifyForgotPasswordGetController } from "../controllers/user/UserVerifyForgotPasswordGetController";
+import { UserVerifyForgotPasswordPostController } from "../controllers/user/UserVerifyForgotPasswordPostController";
 import container from "../dependency-injection";
 import { CONTAINER_TYPES } from "../dependency-injection/types";
 import { checkAuth } from "../middlewares/checkAuth";
@@ -34,12 +34,12 @@ export function register(router: Router) {
     userForgotPasswordPostController.run(req, res)
   );
 
-  const userVerifyForgotPasswordGetController =
-    container.get<UserVerifyForgotPasswordGetController>(
-      CONTAINER_TYPES.UserVerifyForgotPasswordGetController
+  const userVerifyForgotPasswordPostController =
+    container.get<UserVerifyForgotPasswordPostController>(
+      CONTAINER_TYPES.UserVerifyForgotPasswordPostController
     );
-  router.get("/api/user/auth/password/verify-code", (req, res) =>
-    userVerifyForgotPasswordGetController.run(req, res)
+  router.post("/api/user/auth/password/verify-code", (req, res) =>
+    userVerifyForgotPasswordPostController.run(req, res)
   );
 
   const userRestorePasswordPostController =
