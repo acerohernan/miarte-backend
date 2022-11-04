@@ -7,5 +7,5 @@ export function register(router: Router) {
   const statusGetController = container.get<StatusGetController>(
     CONTAINER_TYPES.StatusGetController
   );
-  router.get("/status", (req, res) => statusGetController.run(req, res));
+  router.get("/api/status", (req, res) => statusGetController.run(req, res));
 }

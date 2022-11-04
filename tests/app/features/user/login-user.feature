@@ -4,7 +4,7 @@ Feature: Login an user
     I want to authenticate me
 
     Scenario: Correct credentials
-        Given I send a POST request to "/user/auth/signup" with body:
+        Given I send a POST request to "/api/user/auth/signup" with body:
             """
             {
                 "email": "session@test.com",
@@ -12,7 +12,7 @@ Feature: Login an user
                 "username": "session1"
             }
             """
-        Then I send a POST request to "/user/auth/login" with body:
+        Then I send a POST request to "/api/user/auth/login" with body:
             """
             {
                 "email": "session@test.com",
@@ -23,7 +23,7 @@ Feature: Login an user
         And the response body should have the property "token"
 
     Scenario: A registered user with invalid password
-        Given I send a POST request to "/user/auth/signup" with body:
+        Given I send a POST request to "/api/user/auth/signup" with body:
             """
             {
                 "email": "session2@test.com",
@@ -31,7 +31,7 @@ Feature: Login an user
                 "username": "session2"
             }
             """
-        Then I send a POST request to "/user/auth/login" with body:
+        Then I send a POST request to "/api/user/auth/login" with body:
             """
             {
                 "email": "session2@test.com",
@@ -42,7 +42,7 @@ Feature: Login an user
         And the response body should have an error message
 
     Scenario: A not registered user
-        Given I send a POST request to "/user/auth/login" with body:
+        Given I send a POST request to "/api/user/auth/login" with body:
             """
             {
                 "email": "non-registered@email.com",

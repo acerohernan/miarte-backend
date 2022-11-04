@@ -1,4 +1,5 @@
 import compress from "compression";
+import cors from "cors";
 import errohandler from "errorhandler";
 import express, {
   Express,
@@ -31,6 +32,7 @@ export class Server {
     this.express.use(json());
     this.express.use(helmet());
     this.express.use(compress());
+    this.express.use(cors({ origin: "*" }));
 
     const router = Router();
     router.use(errohandler());

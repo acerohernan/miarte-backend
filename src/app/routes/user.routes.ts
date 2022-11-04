@@ -15,14 +15,14 @@ export function register(router: Router) {
   const userSignUpPostController = container.get<UserSignUpPostController>(
     CONTAINER_TYPES.UserSignUpPostController
   );
-  router.post("/user/auth/signup", (req, res) =>
+  router.post("/api/user/auth/signup", (req, res) =>
     userSignUpPostController.run(req, res)
   );
 
   const userLoginPostController = container.get<UserLoginPostController>(
     CONTAINER_TYPES.UserLoginPostController
   );
-  router.post("/user/auth/login", (req, res) =>
+  router.post("/api/user/auth/login", (req, res) =>
     userLoginPostController.run(req, res)
   );
 
@@ -30,7 +30,7 @@ export function register(router: Router) {
     container.get<UserForgotPasswordPostController>(
       CONTAINER_TYPES.UserForgotPasswordPostController
     );
-  router.post("/user/auth/password/forgot", (req, res) =>
+  router.post("/api/user/auth/password/forgot", (req, res) =>
     userForgotPasswordPostController.run(req, res)
   );
 
@@ -38,7 +38,7 @@ export function register(router: Router) {
     container.get<UserVerifyForgotPasswordGetController>(
       CONTAINER_TYPES.UserVerifyForgotPasswordGetController
     );
-  router.get("/user/auth/password/verify-code", (req, res) =>
+  router.get("/api/user/auth/password/verify-code", (req, res) =>
     userVerifyForgotPasswordGetController.run(req, res)
   );
 
@@ -46,14 +46,14 @@ export function register(router: Router) {
     container.get<UserRestorePasswordPostController>(
       CONTAINER_TYPES.UserRestorePasswordPostController
     );
-  router.post("/user/auth/password/restore", (req, res) =>
+  router.post("/api/user/auth/password/restore", (req, res) =>
     userRestorePasswordPostController.run(req, res)
   );
 
   const userGetController = container.get<UserGetController>(
     CONTAINER_TYPES.UserGetController
   );
-  router.get("/user/information", checkAuth, (req, res) =>
+  router.get("/api/user/information", checkAuth, (req, res) =>
     userGetController.run(req, res)
   );
 
@@ -61,7 +61,7 @@ export function register(router: Router) {
     container.get<UserInformationPutController>(
       CONTAINER_TYPES.UserInformationPutController
     );
-  router.put("/user/information", checkAuth, (req, res) =>
+  router.put("/api/user/information", checkAuth, (req, res) =>
     userInformationPutController.run(req, res)
   );
 
@@ -69,7 +69,7 @@ export function register(router: Router) {
   const userStepsGetController = container.get<UserStepsGetController>(
     CONTAINER_TYPES.UserStepsGetController
   );
-  router.get("/user/steps", checkAuth, (req, res) =>
+  router.get("/api/user/steps", checkAuth, (req, res) =>
     userStepsGetController.run(req, res)
   );
 }

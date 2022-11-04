@@ -4,7 +4,7 @@ Feature: Get user steps
     I want to get my steps
 
     Scenario: An authenticated user
-        Given I send a POST request to "/user/auth/signup" with body:
+        Given I send a POST request to "/api/user/auth/signup" with body:
             """
             {
                 "email": "steps@test.com",
@@ -12,7 +12,7 @@ Feature: Get user steps
                 "username": "stepsuser"
             }
             """
-        Then I send a POST request to "/user/auth/login" with body:
+        Then I send a POST request to "/api/user/auth/login" with body:
             """
             {
                 "email": "steps@test.com",
@@ -20,7 +20,7 @@ Feature: Get user steps
             }
             """
         And the response body should have an access token
-        Then I send an authenticated GET request to "/user/steps"
+        Then I send an authenticated GET request to "/api/user/steps"
         And the response status code should be 200
         And the response body should have the property "steps"
 
@@ -55,6 +55,6 @@ Feature: Get user steps
             }
             """
         Then I get the access token "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1NDU4YTI4OS1lOTlhLTQ3ODMtYjhlMi05NDJhMGZmZGFiMjkiLCJlbWFpbCI6InJlc3RvcmUyMkB0ZXN0LmNvbSIsImlhdCI6MTY2Njk2ODM3M30.xSJlEocMPXJphw6q2jlYpxoQo6P-p6EnosUZYVXsI5Y"
-        And I send an authenticated GET request to "/user/steps"
+        And I send an authenticated GET request to "/api/user/steps"
         And the response status code should be 200
         And the response body should have the property "steps"

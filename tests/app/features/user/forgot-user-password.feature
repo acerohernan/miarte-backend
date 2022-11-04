@@ -4,7 +4,7 @@ Feature: Forgot Password
     I want to get the code to restore my password
 
     Scenario: A registered email
-        Given I send a POST request to "/user/auth/signup" with body:
+        Given I send a POST request to "/api/user/auth/signup" with body:
             """
             {
                 "email": "forgot@test.com",
@@ -12,7 +12,7 @@ Feature: Forgot Password
                 "username": "forgotuser"
             }
             """
-        Then I send a POST request to "/user/auth/password/forgot" with body:
+        Then I send a POST request to "/api/user/auth/password/forgot" with body:
             """
             {
                 "email": "forgot@test.com"

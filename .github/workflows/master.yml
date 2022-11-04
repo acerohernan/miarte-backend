@@ -47,7 +47,7 @@ jobs:
 
       - name: yarn build
         run: |
-          yarn build
+          yarn build:tsc
 
       - name: yarn test
         run: |

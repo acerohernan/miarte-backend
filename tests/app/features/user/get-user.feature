@@ -4,7 +4,7 @@ Feature: Get User Information
     I want to get my user information
 
     Scenario: An authenticated user
-        Given I send a POST request to "/user/auth/signup" with body:
+        Given I send a POST request to "/api/user/auth/signup" with body:
             """
             {
                 "email": "get@test.com",
@@ -12,7 +12,7 @@ Feature: Get User Information
                 "username": "getuser"
             }
             """
-        Then I send a POST request to "/user/auth/login" with body:
+        Then I send a POST request to "/api/user/auth/login" with body:
             """
             {
                 "email": "get@test.com",
@@ -20,11 +20,11 @@ Feature: Get User Information
             }
             """
         And the response body should have an access token
-        And I send an authenticated GET request to "/user/information"
+        And I send an authenticated GET request to "/api/user/information"
         And the response status code should be 200
         And the response body should have the property "user"
 
     Scenario: An anon user
-        Given I send a GET request to "/user/information"
+        Given I send a GET request to "/api/user/information"
         And the response status code should be 401
         And the response body should have an error message

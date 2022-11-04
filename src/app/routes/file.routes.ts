@@ -8,7 +8,7 @@ export function register(router: Router) {
   const fileImagePostController = container.get<FileImagePostController>(
     CONTAINER_TYPES.FileImagePostController
   );
-  router.post("/file/image/upload", checkAuth, (req, res) =>
+  router.post("/api/file/image/upload", checkAuth, (req, res) =>
     fileImagePostController.run(req, res)
   );
 }
